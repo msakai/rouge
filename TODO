@@ -1,0 +1,14 @@
+
+isqrt, sinh, consh, tanh, asinh, acosh, atanh
+
+endpでconsとnil以外をエラーに
+
+
+-- メモ --
+
+(define values (things)
+  (call-with-current-continuation 
+    (lambda (cont) (apply cont things))))
+
+(call-with-values producer consumer)
+(dynamic-wind before thunk after)

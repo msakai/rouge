@@ -1,0 +1,29 @@
+Rouge (る〜じゅ)
+
+Rubyで書いた、Lispの簡易的な処理系です。
+Schemeっぽい感じを目指していますが、仕様はいい加減です。
+
+使い方
+
+  カレントディレクトリで
+  ./rouge.rb
+
+Not a bug, but a feature(tm)
+・完全数/不完全数の概念をサポートしない
+・(define (lambda (x . y) (* x y)) 5 . 6) のような記述も可能
+
+サポートされていない(サポートしたい)機能
+・入出力周り
+・複素数リテラル
+・マクロ
+・マルチバイト文字
+・(他にも沢山)
+
+配付条件
+
+Copyright (C) 2001 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
+    All rights reserved.
+    This is free software with ABSOLUTELY NO WARRANTY.
+
+This is distributed freely in the sence of 
+GPL(GNU General Public License) or Ruby's licence.
