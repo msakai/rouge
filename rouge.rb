@@ -7,6 +7,8 @@
 # This is distributed freely in the sence of 
 # GPL(GNU General Public License) or Ruby's licence.
 
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
 require 'rouge/rouge'
 require 'rouge/console'
 
@@ -28,7 +30,7 @@ STDERR.puts("initializing...")
 
 vm = Lisp.new
 
-Dir['lib/*scm'].each{|item|
+Dir[File.join(File.dirname(__FILE__), "lib", "*scm")].each{|item|
   STDERR.puts("loading #{item}")
   vm.load(item)
 }

@@ -120,6 +120,7 @@ class Lisp
 
 end
 
+require 'rouge/compat'
 require 'rouge/binding'
 require 'rouge/lambda-closure'
 require 'rouge/list'

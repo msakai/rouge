@@ -1,6 +1,6 @@
 以下の方々に感謝します。
 
 高林哲さん
-  パーサー部分(lib/parser.rb)について
+  パーサー部分(rouge/parser.rb)について
   ruby-sexpを改造して使わせてもらっています。
   <URL:http://cvs.namazu.org/ruby-sexp/>

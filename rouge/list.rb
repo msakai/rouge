@@ -8,11 +8,11 @@ class Lisp
     alias to_sexp to_s
 
     def to_a
-      Array.new
+      []
     end
 
     def evaluate(vm_binding)
-      raise "() should not evaluated."
+      self
     end
   end
 
@@ -75,7 +75,6 @@ class Lisp
     end
 
     def to_s
-      #"(#{car.to_s} . #{cdr.to_s})"
       to_s2
     end
     alias :inspect :to_s

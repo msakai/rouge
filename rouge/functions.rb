@@ -140,11 +140,7 @@ class Lisp
   end
 
   def op_num_plus(*args)
-    result = 0
-    args.each{|item|
-      result += item
-    }
-    result
+    args.inject(0){|result, item| result + item}
   end
 
   def op_num_minus(x, *args)
@@ -160,11 +156,7 @@ class Lisp
   end
 
   def op_num_multiply(*args)
-    result = 1
-    args.each{|item|
-      result *= item
-    }
-    result
+    args.inject(1){|result, item| result * item}
   end
 
   # XXX
@@ -341,11 +333,7 @@ class Lisp
   end
 
   def string_append(x, *args)
-    result = x
-    args.each{|item|
-      result += item
-    }
-    result
+    args.inject(""){|result, item| result + item}
   end
 
   def string_to_list(str)
@@ -554,38 +542,18 @@ class Lisp
   # logcount. integer-length
 
   def logior(*args)
-    if args.empty?
-      0
-    else
-      result = args.shift
-      args.each{|item|
-	result |= item
-      }
-      result
-    end
+    args.inject(0){|result, item| result | item}
   end
 
   def logxor(*args)
-    if args.empty?
-      0
-    else
-      result = args.shift
-      args.each{|item|
-	result ^= item
-      }
-      result
-    end
+    args.inject(0){|result, item| result ^ item}
   end
 
   def logand(*args)
     if args.empty?
       -1
     else
-      result = args.shift
-      args.each{|item|
-	result &= item
-      }
-      result
+      args.inject(1){|result, item| result & item}
     end
   end
 

@@ -183,6 +183,7 @@ class Lisp
     { 'unwind-protect'.intern => :unwind_protect,
       :catch   => :_catch,
       :throw   => :_throw,
+      :begin   => :_begin,
       :if      => :_if,
       :set!    => :_set!,
       :let     => :let,

@@ -3,6 +3,8 @@ isqrt, sinh, consh, tanh, asinh, acosh, atanh
 
 endpでconsとnil以外をエラーに
 
+Thread.current["__inspect_key__"]を使って
+サイクルのあるデータをきちんと表示できるようにする。
 
 -- メモ --
 
