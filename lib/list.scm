@@ -29,7 +29,7 @@
 
 (define listp (lambda (x) (or (consp x) (null? x))))
 
-(define lenth
+(define length
   (lambda (x)
     (if (null? x)
 	0

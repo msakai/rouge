@@ -1,3 +1,7 @@
+2002-07-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* rouge/parser.rb: don't use $n in different thread.
+
 Jul 24th 2001 - Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
 
 	* rouge/console.rb:

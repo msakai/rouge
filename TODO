@@ -6,6 +6,8 @@ endpでconsとnil以外をエラーに
 Thread.current["__inspect_key__"]を使って
 サイクルのあるデータをきちんと表示できるようにする。
 
+evalを、global環境ではなく呼び出した環境で評価するようにする。
+
 -- メモ --
 
 (define values (things)
