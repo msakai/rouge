@@ -27,11 +27,10 @@ EOT
 STDERR.puts("initializing...")
 
 vm = Lisp.new
-console = Lisp::Console.new(vm)
 
 Dir['lib/*scm'].each{|item|
   STDERR.puts("loading #{item}")
   vm.load(item)
 }
 
-console.run
+Lisp::Console.run(vm)

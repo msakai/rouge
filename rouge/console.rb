@@ -2,19 +2,33 @@
 
 class Lisp
 
-  class Console
+  module Console
     
     @@use_readline = false
     begin
       require 'readline'
+      Readline.completion_proc = lambda do
+	|input_str|
+	result = Array.new
+	re = Regexp.compile('^' + Regexp.escape(input_str) + '.*')
+	[vm.global_binding.hash, vm.sp_forms].each{|hash|
+	  hash.each_key{|sym|
+	    str = sym.id2name
+	    result.push(str) if re =~ str
+	  }
+	}
+	result
+      end
       @@use_readline = true
     rescue LoadError
-    end
+    end    
 
     def eof?
       false
     end
-  
+    module_function :eof?
+
+
     def gets
       if @firstline
 	prompt = "rouge> "
@@ -30,15 +44,17 @@ class Lisp
   	STDIN.gets
       end
     end
+    module_function :gets
   
   
-    def run
+    def run(vm)
+      @vm = vm
       reader = SexpReader.new(self)
 
       while true
 	begin
 	  @firstline = true
-	  val = @vm.evaluate(reader.read)
+	  val = vm.evaluate(reader.read)
 	  if reader.buffer_empty? and val != Lisp::Unspecified
 	    STDOUT.puts(Lisp::Sexp(val, true))
 	  end
@@ -48,25 +64,14 @@ class Lisp
 	end
       end
     end
+    module_function :run
 
 
-    def initialize(vm)
-      @vm = vm
-
-      Readline.completion_proc = lambda do
-  	|input_str|
-  	result = Array.new
-  	re = Regexp.compile('^' + Regexp.escape(input_str) + '.*')
-  	[vm.global_binding.hash, vm.sp_forms].each{|hash|
-  	  hash.each_key{|sym|
-  	    str = sym.id2name
-  	    result.push(str) if re =~ str
-  	  }
-  	}
-  	result
-      end
+    def vm
+      @vm
     end
-  
+    module_function :vm
+
   end # Console
 
 end # Lisp
