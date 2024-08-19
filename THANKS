@@ -1,6 +1,6 @@
-$B0J2<$NJ}!9$K46<U$7$^$9!#(B
+以下の方々に感謝します。
 
-$B9bNSE/$5$s(B
-  $B%Q!<%5!<ItJ,(B(rouge/parser.rb)$B$K$D$$$F(B
-  ruby-sexp$B$r2~B$$7$F;H$o$;$F$b$i$C$F$$$^$9!#(B
+高林哲さん
+  パーサー部分(rouge/parser.rb)について
+  ruby-sexpを改造して使わせてもらっています。
   <URL:http://cvs.namazu.org/ruby-sexp/>

@@ -1,4 +1,5 @@
-# ruby-1.6¤Ø¤Î¸åÊı¸ß´¹À­¤Î¤¿¤á
+# coding: utf-8
+# ruby-1.6ã¸ã®å¾Œæ–¹äº’æ›æ€§ã®ãŸã‚
 unless Enumerable.method_defined? :inject
   module Enumerable
     def inject(result)

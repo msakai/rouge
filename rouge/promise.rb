@@ -1,6 +1,7 @@
+# coding: utf-8
 
-# $BK\Ev$O!"(Bdefine$B$H(Bdefine-syntax$B$G<BAu2DG=$J$s$@$1$I!"(B
-# syntax$B<~$j$K$D$$$FNI$/M}2r$7$F$$$J$$$N$G!#(B
+# 本当は、defineとdefine-syntaxで実装可能なんだけど、
+# syntax周りについて良く理解していないので。
 
 class Lisp
   

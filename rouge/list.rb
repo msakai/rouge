@@ -1,3 +1,4 @@
+# coding: utf-8
 class Lisp
 
   class <<(Null = SExpObject.new)
@@ -96,7 +97,7 @@ class Lisp
       val
     end
 
-    # FIXME: ½Û´Ä¤ò¥Á¥§¥Ã¥¯
+    # FIXME: å¾ªç’°ã‚’ãƒã‚§ãƒƒã‚¯
     def list?
       case @cdr
       when Cons

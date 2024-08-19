@@ -1,14 +1,14 @@
 
 isqrt, sinh, consh, tanh, asinh, acosh, atanh
 
-endp$B$G(Bcons$B$H(Bnil$B0J30$r%(%i!<$K(B
+endpでconsとnil以外をエラーに
 
-Thread.current["__inspect_key__"]$B$r;H$C$F(B
-$B%5%$%/%k$N$"$k%G!<%?$r$-$A$s$HI=<($G$-$k$h$&$K$9$k!#(B
+Thread.current["__inspect_key__"]を使って
+サイクルのあるデータをきちんと表示できるようにする。
 
-eval$B$r!"(Bglobal$B4D6-$G$O$J$/8F$S=P$7$?4D6-$GI>2A$9$k$h$&$K$9$k!#(B
+evalを、global環境ではなく呼び出した環境で評価するようにする。
 
--- $B%a%b(B --
+-- メモ --
 
 (define values (things)
   (call-with-current-continuation 

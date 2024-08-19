@@ -5,4 +5,4 @@
 Jul 24th 2001 - Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
 
 	* rouge/console.rb:
-	    readline$B3HD%%i%$%V%i%j$,L5$/$F$bBg>fIW$K$7$?!#(B
+	    readline拡張ライブラリが無くても大丈夫にした。

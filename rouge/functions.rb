@@ -1,3 +1,4 @@
+# coding: utf-8
 
 require 'rouge/promise'
 require 'rouge/port'
@@ -498,7 +499,7 @@ class Lisp
     }
   end
 
-  # FIXME: ¥°¥í¡¼¥Ğ¥ë¤Ê´Ä¶­¤ÇÉ¾²Á¤µ¤ì¤Æ¤·¤Ş¤¦¡£¤½¤Î»şÅÀ¤Ç¤Î´Ä¶­¤Ë¤¹¤ë¡£
+  # FIXME: ã‚°ãƒ­ãƒ¼ãƒãƒ«ãªç’°å¢ƒã§è©•ä¾¡ã•ã‚Œã¦ã—ã¾ã†ã€‚ãã®æ™‚ç‚¹ã§ã®ç’°å¢ƒã«ã™ã‚‹ã€‚
   def _eval(expression, environment_specifier = nil)
     evaluate(expression, vm_binding)
   end
@@ -534,9 +535,9 @@ class Lisp
   # FIXME
   # incf, decf, signum
 
-  # ÌµÍı´Ø¿ô¡¢»Ø¿ô´Ø¿ô¡¢ÂĞ¿ô´Ø¿ô¡¢»°³Ñ´Ø¿ô
+  # ç„¡ç†é–¢æ•°ã€æŒ‡æ•°é–¢æ•°ã€å¯¾æ•°é–¢æ•°ã€ä¸‰è§’é–¢æ•°
 
-  # ¿ô¤Î¾å¤ÎÏÀÍı·×»»
+  # æ•°ã®ä¸Šã®è«–ç†è¨ˆç®—
   # FIXME: logeqv
   # lognand, lognor, logandc1, logandc2, logiorc, logiorc2, lognot, logtest
   # logcount. integer-length
@@ -569,7 +570,7 @@ class Lisp
     x << count
   end
 
-  # Íğ¿ô
+  # ä¹±æ•°
 
   # def random(x)
   # end  
@@ -579,16 +580,16 @@ class Lisp
   private
   
   def define_builtin_symbols
-    # É¸½à¼êÂ³¤­
+    # æ¨™æº–æ‰‹ç¶šã
 
     {
-      # Æ±ÃÍ¤òÄ´¤Ù¤ë½Ò¸ì¼êÂ³¤­
+      # åŒå€¤ã‚’èª¿ã¹ã‚‹è¿°èªæ‰‹ç¶šã
       :eq?    => :_eq?,
       :eqv?   => :_eqv?,
       :equal? => :_equal?,
 
-      # ¿ôÃÍ±é»»
-      # FIXME: »ÅÍÍ¤Ë¸·Ì©¤Ç¤Ê¤¤¤Î¤Ç¡¢¸å¤Ç½¤Àµ¤¹¤ë
+      # æ•°å€¤æ¼”ç®—
+      # FIXME: ä»•æ§˜ã«å³å¯†ã§ãªã„ã®ã§ã€å¾Œã§ä¿®æ­£ã™ã‚‹
       :number?    => :_number?,
       :complex?   => :_complex?,
       :float?     => :_float?,
@@ -618,15 +619,15 @@ class Lisp
       'real-part'.intern  => :real_part,
       'imag-part'.intern  => :imag_part,
 
-      # ¿ôÃÍ¤ÎÆş½ĞÎÏ
+      # æ•°å€¤ã®å…¥å‡ºåŠ›
       'number->string'.intern => :number_to_string,
       #'string->number'.intern => :string_to_number,
       
-      # ÏÀÍı¼°
+      # è«–ç†å¼
       :not      => :_not,
       :boolean? => :_boolean?,
       
-      # ¥Ú¥¢¤È¥ê¥¹¥È
+      # ãƒšã‚¢ã¨ãƒªã‚¹ãƒˆ
       :pair? => :_pair?,
       :car   => :car,
       :cdr   => :cdr,
@@ -634,16 +635,16 @@ class Lisp
       'set-cdr!'.intern => :set_cdr,
       :null? => :_null?,
 
-      # ¥·¥ó¥Ü¥ë
+      # ã‚·ãƒ³ãƒœãƒ«
       :symbol? => :_symbol?,
       'symbol->string'.intern => :symbol_to_string,
       'string->symbol'.intern => :string_to_symbol,
 
-      # Ê¸»ú·¿
+      # æ–‡å­—å‹
       :char? => :_char?,
       'integer->char'.intern => :int_to_char,
       
-      # Ê¸»úÎó
+      # æ–‡å­—åˆ—
       :string? => :_string?,
       'make-string'.intern => :make_string,
       :string               => :string,
@@ -666,7 +667,7 @@ class Lisp
       'string-copy'.intern  => :string_copy,
       'string-fill!'.intern => :string_fill,
 
-      # ¥Ù¥¯¥¿
+      # ãƒ™ã‚¯ã‚¿
       'vector?'.intern       => :_vector?,
       'make-vector'.intern   => :make_vector,
       :vector => :vector,
@@ -676,7 +677,7 @@ class Lisp
       'vector->list'.intern  => :vector_to_list,
       'list->vector'.intern  => :list_to_vector,
 
-      # À©¸æµ¡Ç½
+      # åˆ¶å¾¡æ©Ÿèƒ½
       :procedure? => :_procedure?,
       # FIXME: apply, map
       # 'for-each'.intern => :_for_each.
@@ -687,14 +688,14 @@ class Lisp
       # Eval
       :eval => :_eval,
 
-      # FIXME: port´Ø·¸
+      # FIXME: porté–¢ä¿‚
       'input-port?'.intern  => :_input_port?,
       'output-port?'.intern => :_output_port?,
       'close-input-file'.intern  => :close_input_file,
       'close-output-file'.intern => :close_output_file,
       'eof-object?'.intern => :_eof_object?,
 
-      # ¥·¥¹¥Æ¥à¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹
+      # ã‚·ã‚¹ãƒ†ãƒ ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
       :load => :load,
       :bye  => :bye,
       :exit => :bye,

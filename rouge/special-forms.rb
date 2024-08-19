@@ -1,3 +1,4 @@
+# coding: utf-8
 
 class Lisp
   #############################################################################
@@ -64,7 +65,7 @@ class Lisp
     x
   end
 
-  # FIXME: °ÕÌ£¤¬°ã¤¦?
+  # FIXME: æ„å‘³ãŒé•ã†?
   def unwind_protect(vm_binding, protected_form, *cleanup_forms)
     val = Null
     begin
@@ -189,7 +190,7 @@ class Lisp
       :let     => :let,
       'let*'.intern   => :let_star,
       'letrec'.intern => :let_star, # XXX?
-      # special form ¤ÇÌµ¤¯¤Æ¤âÎÉ¤¤¤Ï¤º¤À¤±¤É
+      # special form ã§ç„¡ãã¦ã‚‚è‰¯ã„ã¯ãšã ã‘ã©
       :and     => :_and,
       :or      => :_or,
       :case    => :_case,

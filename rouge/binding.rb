@@ -1,6 +1,7 @@
+# coding: utf-8
 class Lisp
 
-  # Ruby¤À¤ÈÂ«ÇûÂĞ¤Î¥ê¥¹¥È¤è¤ê¤âHash¤ÎÊı¤¬³Ú¤Ê¤ó¤Ç¡Ä
+  # Rubyã ã¨æŸç¸›å¯¾ã®ãƒªã‚¹ãƒˆã‚ˆã‚Šã‚‚Hashã®æ–¹ãŒæ¥½ãªã‚“ã§â€¦
   class Binding
     class NotBoundedError < VMError
     end
