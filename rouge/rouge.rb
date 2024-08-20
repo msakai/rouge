@@ -1,5 +1,5 @@
 # coding: utf-8
-# Copyright (C) 2001 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
+# Copyright (C) 2001 Masahiro Sakai
 #     All rights reserved.
 #     This is free software with ABSOLUTELY NO WARRANTY.
 #

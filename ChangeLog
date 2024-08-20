@@ -1,8 +1,8 @@
-2002-07-13  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+2002-07-13  Masahiro Sakai  <masahiro.sakai@gmail.com>
 
 	* rouge/parser.rb: don't use $n in different thread.
 
-Jul 24th 2001 - Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
+Jul 24th 2001 - Masahiro Sakai <masahiro.sakai@gmail.com>
 
 	* rouge/console.rb:
 	    readline拡張ライブラリが無くても大丈夫にした。

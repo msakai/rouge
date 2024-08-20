@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# Copyright (C) 2001 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
+# Copyright (C) 2001 Masahiro Sakai
 #     All rights reserved.
 #     This is free software with ABSOLUTELY NO WARRANTY.
 #
@@ -16,7 +16,7 @@ STDERR.write <<EOT
 ==============================================================
 Rouge - Lisp Interpriter written in Ruby
 
-Copyright (C) 2001 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
+Copyright (C) 2001 Masahiro Sakai
     All rights reserved.
     This is free software with ABSOLUTELY NO WARRANTY.
 
