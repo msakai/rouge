@@ -1,6 +1,6 @@
 
 class Lisp
-  
+
   class Port
     EOF = Object.new
 
@@ -29,9 +29,9 @@ class Lisp
     def read
       @reader = SexpReader.new(io) unless @reader
       if @reader.empty?
-	EOF
+        EOF
       else
-	@reader.read
+        @reader.read
       end
     end
 
@@ -43,16 +43,16 @@ class Lisp
 
     def peek_char
       if @peek_char
-	result = @peek_char
-	@peek_char = nil
-	result
+        result = @peek_char
+        @peek_char = nil
+        result
       else
-	c = io.getc
-	if c
-	  @peek_char = Character.new(c)
-	else
-	  @peek_char = EOF
-	end
+        c = io.getc
+        if c
+          @peek_char = Character.new(c)
+        else
+          @peek_char = EOF
+        end
       end
     end
   end
@@ -71,7 +71,7 @@ class Lisp
       io.write(String(obj))
       Unspecified
     end
-    
+
     def write_char(c)
       io.putc(Integer(c))
     end

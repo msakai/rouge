@@ -17,7 +17,7 @@ class Lisp
     end
   end
 
-  
+
   class Cons < SExpObject
     include Enumerable
 
@@ -39,11 +39,11 @@ class Lisp
       vm  = vm_binding.vm
 
       Cons.collect_from_list(@cdr){|item|
-	if item.is_a? Cons
-	  vm.evaluate(item.car, vm_binding)
-	else
-	  vm.evaluate(item, vm_binding)
-	end
+        if item.is_a? Cons
+          vm.evaluate(item.car, vm_binding)
+        else
+          vm.evaluate(item, vm_binding)
+        end
       }
     end
 
@@ -53,24 +53,24 @@ class Lisp
       vm  = vm_binding.vm
 
       if vm.sp_forms.has_key?(@car)
-	vm.sp_forms[@car].call(vm_binding, *Array(@cdr))
+        vm.sp_forms[@car].call(vm_binding, *Array(@cdr))
       else
-	func = vm.evaluate(@car, vm_binding)
-	args = eval_func_args(vm_binding)
-	vm.funcall0(func, args)
+        func = vm.evaluate(@car, vm_binding)
+        args = eval_func_args(vm_binding)
+        vm.funcall0(func, args)
       end
     end
 
     def _to_s2
       if cdr.instance_of?(Cons) then
-  	"#{Lisp.Sexp(car)} #{cdr._to_s2}"
+        "#{Lisp.Sexp(car)} #{cdr._to_s2}"
       elsif cdr == Null
-  	"#{Lisp.Sexp(car)}"
+        "#{Lisp.Sexp(car)}"
       else
-  	"#{Lisp.Sexp(car)} . #{Lisp.Sexp(cdr)}"
+        "#{Lisp.Sexp(car)} . #{Lisp.Sexp(cdr)}"
       end
     end
-  
+
     def to_s2
       "(#{_to_s2})"
     end
@@ -83,16 +83,16 @@ class Lisp
     def to_a
       case cdr
       when Cons, Null
-	Array(@cdr).unshift(@car)
+        Array(@cdr).unshift(@car)
       else
-	raise "Not a pure list"
+        raise "Not a pure list"
       end
     end
 
     def self.from_a(ary)
       val = Null
       (ary.size - 1).downto(0){|i|
-	val = self.new(ary[i], val)
+        val = self.new(ary[i], val)
       }
       val
     end
@@ -101,28 +101,28 @@ class Lisp
     def list?
       case @cdr
       when Cons
-	@cdr.list?
+        @cdr.list?
       when Null
-	true
+        true
       else
-	false
+        false
       end
     end
 
     def each
       tmp = self
       while tmp.is_a? Cons
-	yield tmp.car
-	tmp = tmp.cdr
+        yield tmp.car
+        tmp = tmp.cdr
       end
     end
 
     def each_list
       tmp = self
       while true
-	yield tmp
-	break unless tmp.is_a? Cons
-	tmp = tmp.cdr
+        yield tmp
+        break unless tmp.is_a? Cons
+        tmp = tmp.cdr
       end
     end
 
@@ -130,11 +130,11 @@ class Lisp
     def self.collect_from_list(x, &block)
       case x
       when Cons
-	Cons.new(yield(x), collect_from_list(x.cdr, &block))
+        Cons.new(yield(x), collect_from_list(x.cdr, &block))
       when Null
-	Null
+        Null
       else
-	yield(x)
+        yield(x)
       end
     end
 

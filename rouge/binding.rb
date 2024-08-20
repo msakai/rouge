@@ -11,11 +11,11 @@ class Lisp
 
     def initialize(x)
       if x.is_a? Binding
-	@parent = x
-	@vm     = x.vm
+        @parent = x
+        @vm     = x.vm
       else
-	@vm     = x
-	@parent = nil
+        @vm     = x
+        @parent = nil
       end
       @hash = nil
     end
@@ -31,11 +31,11 @@ class Lisp
 
     def []=(sym, val)
       if @hash and @hash.has_key? sym
-	bind(sym, val)
+        bind(sym, val)
       elsif @parent and @parent.has_key? sym
-	@parent[sym] = val
+        @parent[sym] = val
       else
-	raise "Unbounded: #{sym}"
+        raise "Unbounded: #{sym}"
       end
       val
     end

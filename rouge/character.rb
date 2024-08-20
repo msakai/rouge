@@ -16,31 +16,31 @@ class Lisp
     def initialize(obj)
       case obj
       when Integer
-	@num = obj
+        @num = obj
       when String
-	if obj.size == 1
-	  @num = obj[0]
-	else
-	  @num = NAME_TO_CHAR.fetch(obj){
-	    raise "Unknown character: #{obj}"
-	  }
-	end
+        if obj.size == 1
+          @num = obj[0]
+        else
+          @num = NAME_TO_CHAR.fetch(obj){
+            raise "Unknown character: #{obj}"
+          }
+        end
       end
     end
 
     def name
       CHAR_TO_NAME.fetch(@num) {
-	false
+        false
       }
     end
 
     def to_s
       "" << @num
     end
-    
+
     def to_sexp
       s = CHAR_TO_NAME.fetch(@num) {
-	String(self)
+        String(self)
       }
       "#\\" + s
     end

@@ -38,22 +38,22 @@ class Lisp
 
     def evaluate(vm_binding)
       unless @quoted.is_a? Cons
-	@quoted
+        @quoted
       else
-	result = Array.new
-	Array(@quoted).each do |item|
-	  unless item.is_a? Unquote
-	    result.push(item)
-	  else
-	    val = vm_binding.vm.evaluate(item.content, vm_binding)
-	    if item.splicing?
-	      result << Array(val)
-	    else
-	      result.push(val)
-	    end
-	  end
-	end
-	Cons.from_a(result)
+        result = Array.new
+        Array(@quoted).each do |item|
+          unless item.is_a? Unquote
+            result.push(item)
+          else
+            val = vm_binding.vm.evaluate(item.content, vm_binding)
+            if item.splicing?
+              result << Array(val)
+            else
+              result.push(val)
+            end
+          end
+        end
+        Cons.from_a(result)
       end
     end
 
@@ -85,9 +85,9 @@ class Lisp
 
     def to_sexp
       if splicing?
-	",@" + Sexp(@content)
+        ",@" + Sexp(@content)
       else
-	"," + Sexp(@content)
+        "," + Sexp(@content)
       end
     end
   end

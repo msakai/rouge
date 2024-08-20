@@ -4,7 +4,7 @@
 # syntax周りについて良く理解していないので。
 
 class Lisp
-  
+
   class Promiss < SExpObject
     def initialize(proc)
       @proc  = proc
@@ -13,9 +13,9 @@ class Lisp
 
     def force
       if @value
-	@value
+        @value
       else
-	@value = @proc.call
+        @value = @proc.call
       end
     end
 

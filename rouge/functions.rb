@@ -150,7 +150,7 @@ class Lisp
     else
       result = x
       args.each{|item|
-	result -= item
+        result -= item
       }
       result
     end
@@ -172,14 +172,14 @@ class Lisp
   def op_num_divide(x, *args)
     if args.empty?
       if x.is_a? Integer
-	Rational(1, x)
+        Rational(1, x)
       else
-	1 / x
+        1 / x
       end
     else
       result = x
       args.each{ |item|
-	result = result / item
+        result = result / item
       }
       result
     end
@@ -511,7 +511,7 @@ class Lisp
   def ruby_eval(str)
     Kernel.eval(str)
   end
-  
+
   def ruby_send(obj, name, *args)
     obj.__send__(name, *args)
   end
@@ -573,12 +573,12 @@ class Lisp
   # 乱数
 
   # def random(x)
-  # end  
+  # end
 
   #############################################################################
 
   private
-  
+
   def define_builtin_symbols
     # 標準手続き
 
@@ -622,11 +622,11 @@ class Lisp
       # 数値の入出力
       'number->string'.intern => :number_to_string,
       #'string->number'.intern => :string_to_number,
-      
+
       # 論理式
       :not      => :_not,
       :boolean? => :_boolean?,
-      
+
       # ペアとリスト
       :pair? => :_pair?,
       :car   => :car,
@@ -643,7 +643,7 @@ class Lisp
       # 文字型
       :char? => :_char?,
       'integer->char'.intern => :int_to_char,
-      
+
       # 文字列
       :string? => :_string?,
       'make-string'.intern => :make_string,
@@ -705,7 +705,7 @@ class Lisp
       |key, val|
       @global_binding.bind(key, method(val))
     }
-    
+
     [:exp, :log, :sin, :cos, :tan, :sqrt].each{|sym|
       @global_binding.bind(sym, Math.method(sym))
     }

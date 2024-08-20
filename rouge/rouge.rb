@@ -3,7 +3,7 @@
 #     All rights reserved.
 #     This is free software with ABSOLUTELY NO WARRANTY.
 #
-# This is distributed freely in the sence of 
+# This is distributed freely in the sence of
 # GPL(GNU General Public License) or Ruby's licence.
 
 require 'complex'
@@ -71,9 +71,9 @@ class Lisp
     reader = SexpReader.new.scan(sexp)
     while true
       begin
-	evaluate(reader.read)
+        evaluate(reader.read)
       rescue SexpReader::UnexpectedEndOfExpression
-	break
+        break
       end
     end
   end
@@ -95,9 +95,9 @@ class Lisp
       str = String(obj)
     when String
       if dump
-	obj.dump
+        obj.dump
       else
-	obj
+        obj
       end
     else
       obj.inspect

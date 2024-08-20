@@ -53,7 +53,7 @@ class Lisp
     _begin(new_binding, *forms)
   end
 
-  def _begin(vm_binding, *forms)    
+  def _begin(vm_binding, *forms)
     val = Unspecified
     forms.each{|form|
       val = evaluate(form, vm_binding)
@@ -109,8 +109,8 @@ class Lisp
     result = Unspecified
     forms.each do |form|
       if (form.car == :else) or (result = evaluate(form.car))
-	result = _begin(vm_binding, *Array(form.cdr)) if form.cdr != Null
-	break
+        result = _begin(vm_binding, *Array(form.cdr)) if form.cdr != Null
+        break
       end
     end
     result
@@ -122,8 +122,8 @@ class Lisp
     key = evaluate(key, vm_binding)
     forms.each do |form|
       if (form.car == :else) or funcall0(memv, key, form.car)
-	result = _begin(vm_binding, *Array(form.cdr))
-	break
+        result = _begin(vm_binding, *Array(form.cdr))
+        break
       end
     end
     result
@@ -146,15 +146,15 @@ class Lisp
     end
 
     while true
-      if evaluate(end_clause.car, new_binding)	
-	return _begin(new_binding, *Array(end_clause.cdr))
+      if evaluate(end_clause.car, new_binding)
+        return _begin(new_binding, *Array(end_clause.cdr))
       end
 
       _begin(new_binding, *commands)
 
       var_decls.each do |var_decl|
-	sym, init, step = var_decl
-	new_binding.bind(sym, evaluate(step, new_binding)) if step
+        sym, init, step = var_decl
+        new_binding.bind(sym, evaluate(step, new_binding)) if step
       end
     end
   end
@@ -175,7 +175,7 @@ class Lisp
   ############################################################################
 
   private
-  
+
   def define_sp_forms
     [:let, :quote, :define, :eval, :delay, :cond].each{ |sym|
       @sp_forms[sym] = method(sym)
@@ -208,7 +208,7 @@ class Lisp
     # @sp_forms['multiple-value-call'.intern]
     # @sp_forms['multiple-value-setq'.intern]
     # @sp_forms['multiple-value-prog1'.intern]
-    # @sp_forms['return-from'.intern]    
+    # @sp_forms['return-from'.intern]
   end
 
 end # class Lisp

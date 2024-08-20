@@ -32,21 +32,21 @@
 (define length
   (lambda (x)
     (if (null? x)
-	0
-	(+ 1 (length (cdr x))))))
+        0
+        (+ 1 (length (cdr x))))))
 
 (define list (lambda x x))
 
 (define copy-list
   (lambda (x)
     (if (null? x)
-	'()
-	(cons (car x) (copy-list (cdr x))))))
+        '()
+        (cons (car x) (copy-list (cdr x))))))
 
 (define append
   (lambda (x y)
     (if (null? x) (copy-list y)
-	(cons (car x) (append (cdr x) y)))))
+        (cons (car x) (append (cdr x) y)))))
 
 (define reverse
   (lambda (src &optional dest)
@@ -66,9 +66,9 @@
 (define member-if
   (lambda (x list func)
     (if (null? list)
-	#f
-	(if (func x (car list)) list
-	    (member-if x (cdr list) func)))))
+        #f
+        (if (func x (car list)) list
+            (member-if x (cdr list) func)))))
 
 (define memq (lambda (x list) (member-if x list eq?)))
 (define memv (lambda (x list) (member-if x list eqv?)))
@@ -77,10 +77,10 @@
 (define assoc-if
   (lambda (obj alist func)
     (if (null? alist)
-	#f
-	(if (func obj (car (car alist)))
-	    (car alist)
-	    (assoc-if obj (cdr alist) func)))))
+        #f
+        (if (func obj (car (car alist)))
+            (car alist)
+            (assoc-if obj (cdr alist) func)))))
 
 (define assq (lambda (obj alist) (assoc-if obj alist eq?)))
 (define assv (lambda (obj alist) (assoc-if obj alist eqv?)))

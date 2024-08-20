@@ -4,7 +4,7 @@
 #     All rights reserved.
 #     This is free software with ABSOLUTELY NO WARRANTY.
 #
-# This is distributed freely in the sence of 
+# This is distributed freely in the sence of
 # GPL(GNU General Public License) or Ruby's licence.
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
@@ -20,7 +20,7 @@ Copyright (C) 2001 Masahiro Sakai <s01397ms@sfc.keio.ac.jp>
     All rights reserved.
     This is free software with ABSOLUTELY NO WARRANTY.
 
-This is distributed freely in the sence of 
+This is distributed freely in the sence of
 GPL(GNU General Public License) or Ruby's licence.
 ==============================================================
 
