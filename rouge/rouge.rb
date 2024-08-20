@@ -8,7 +8,6 @@
 
 require 'complex'
 require 'rational'
-require 'mathn'
 
 class Lisp
 

@@ -170,12 +170,10 @@ class Lisp
   end
 
   def op_num_divide(x, *args)
+    x = Rational(x, 1) if x.is_a? Integer
+
     if args.empty?
-      if x.is_a? Integer
-        Rational(1, x)
-      else
-        1 / x
-      end
+      1 / x
     else
       result = x
       args.each{ |item|
@@ -712,7 +710,7 @@ class Lisp
     @global_binding.bind(:pi, Math::PI)
     @global_binding.bind('*e*'.intern, Math::E)
 
-    @global_binding.bind('make-rectangular'.intern, Complex.method(:new))
+    @global_binding.bind('make-rectangular'.intern, Kernel.singleton_method(:Complex))
     @global_binding.bind('make-polar'.intern, Complex.method(:polar))
     @global_binding.bind('*i*'.intern, Complex::I)
 
