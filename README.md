@@ -13,7 +13,8 @@ Schemeっぽい感じを目指していますが、仕様はいい加減です�
 ## 使い方
 
 ```bash
-./rouge.rb
+bundle install
+bundle exec rouge.rb
 ```
 
 `(bye)` で終了します。
