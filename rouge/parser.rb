@@ -137,7 +137,7 @@ class Lisp
         # double-quoted string
         if $7
           token = $7
-          token = eval(token)
+          token = token.undump
         end
 
         if $9
