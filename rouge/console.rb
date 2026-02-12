@@ -13,7 +13,7 @@ class Lisp
         re = Regexp.compile('^' + Regexp.escape(input_str) + '.*')
         [vm.global_binding.hash, vm.sp_forms].each{|hash|
           hash.each_key{|sym|
-            str = sym.id2name
+            str = sym.to_s
             result.push(str) if re =~ str
           }
         }

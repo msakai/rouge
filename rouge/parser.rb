@@ -137,7 +137,7 @@ class Lisp
         # double-quoted string
         if $7
           token = $7
-          token = Thread.new{ $SAFE = 4; eval(token) }.value
+          token = eval(token)
         end
 
         if $9

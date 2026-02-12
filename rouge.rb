@@ -7,10 +7,8 @@
 # This is distributed freely in the sence of
 # GPL(GNU General Public License) or Ruby's licence.
 
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-
-require 'rouge/rouge'
-require 'rouge/console'
+require_relative 'rouge/rouge'
+require_relative 'rouge/console'
 
 STDERR.write <<EOT
 ==============================================================

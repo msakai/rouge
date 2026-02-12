@@ -1,7 +1,7 @@
 # coding: utf-8
 
-require 'rouge/promise'
-require 'rouge/port'
+require_relative 'promise'
+require_relative 'port'
 
 class Lisp
 
@@ -18,7 +18,7 @@ class Lisp
   end
 
   def _equal?(x, y)
-    x.type == y.type and x == y
+    x.class == y.class and x == y
   end
 
   def _number?(x)
@@ -37,7 +37,7 @@ class Lisp
     if _float?(x) or _rational?(x)
       true
     elsif x.is_a? Complex
-      x.image == 0
+      x.imaginary == 0
     else
       false
     end
@@ -163,7 +163,7 @@ class Lisp
   # XXX
   def _rationalize_complex(x)
     real  = x.real
-    image = x.image
+    image = x.imaginary
     real  = Rational(real) if real.is_a? Integer
     image = Rational(image) if image.is_a? Integer
     Complex(real, image)
@@ -211,7 +211,7 @@ class Lisp
   end
 
   def real_part(x)
-    if x.respond_to? real
+    if x.respond_to? :real
       x.real
     else
       x
@@ -219,8 +219,8 @@ class Lisp
   end
 
   def imag_part(x)
-    if x.respond_to? image
-      x.image
+    if x.respond_to? :imaginary
+      x.imaginary
     else
       0
     end
@@ -287,7 +287,7 @@ class Lisp
   end
 
   def symbol_to_string(x)
-    x.id2name.freeze
+    x.to_s.freeze
   end
 
   def string_to_symbol(x)

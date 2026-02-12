@@ -6,9 +6,6 @@
 # This is distributed freely in the sence of
 # GPL(GNU General Public License) or Ruby's licence.
 
-require 'complex'
-require 'rational'
-
 class Lisp
 
   class VMError < RuntimeError
@@ -58,7 +55,7 @@ class Lisp
       obj.evaluate(vm_binding)
     when Symbol
       val = vm_binding[obj]
-      raise Binding::NotBoundedError, format("%s is not bounded", obj.id2name) unless val
+      raise Binding::NotBoundedError, format("%s is not bounded", obj.to_s) unless val
       val
     else
       obj
@@ -83,7 +80,7 @@ class Lisp
       obj.to_sexp
     when Symbol
       # FIXME
-      obj.id2name
+      obj.to_s
     when TrueClass
       '#t'
     when FalseClass
@@ -104,7 +101,7 @@ class Lisp
   end
 
   def Sexp(obj, dump = false)
-    type.Sexp(obj, dump)
+    self.class.Sexp(obj, dump)
   end
 
   #############################################################################
@@ -120,12 +117,11 @@ class Lisp
 
 end
 
-require 'rouge/compat'
-require 'rouge/binding'
-require 'rouge/lambda-closure'
-require 'rouge/list'
-require 'rouge/quote'
-require 'rouge/character'
-require 'rouge/special-forms'
-require 'rouge/functions'
-require 'rouge/parser'
+require_relative 'binding'
+require_relative 'lambda-closure'
+require_relative 'list'
+require_relative 'quote'
+require_relative 'character'
+require_relative 'special-forms'
+require_relative 'functions'
+require_relative 'parser'
