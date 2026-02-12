@@ -141,7 +141,7 @@ class TestEvaluator < Minitest::Test
   end
 
   def test_string_append
-    assert_equal "world", eval('(string-append "hello" "world")')
+    assert_equal "helloworld", eval('(string-append "hello" "world")')
   end
 
   # Recursion

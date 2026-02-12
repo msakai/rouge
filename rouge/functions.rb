@@ -331,7 +331,7 @@ class Lisp
     Unspecified
   end
 
-  def string_append(x, *args)
+  def string_append(*args)
     args.inject(""){|result, item| result + item}
   end
 
