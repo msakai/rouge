@@ -52,7 +52,7 @@ class Lisp
     def evaluate(vm_binding)
       vm  = vm_binding.vm
 
-      if vm.sp_forms.has_key?(@car)
+      if vm.sp_forms.key?(@car)
         vm.sp_forms[@car].call(vm_binding, *Array(@cdr))
       else
         func = vm.evaluate(@car, vm_binding)

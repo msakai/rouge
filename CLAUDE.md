@@ -4,15 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Rouge (る〜じゅ) is a Scheme-like Lisp interpreter written in Ruby, created in 2001. It has no build step or dependency manager — just Ruby and its standard library.
+Rouge (る〜じゅ) is a Scheme-like Lisp interpreter written in Ruby, created in 2001.
 
-## Running
+## Commands
 
 ```bash
-./rouge.rb          # Start the REPL (exit with (bye) or (exit))
+./rouge.rb                  # Start the REPL (exit with (bye) or (exit))
+bundle install              # Install dev dependencies
+bundle exec rake test       # Run the test suite (minitest)
+bundle exec ruby test/test_parser.rb     # Run a single test file
 ```
-
-There is no test suite. Test manually via the REPL.
 
 ## Architecture
 
@@ -36,13 +37,13 @@ The interpreter follows a classic Lisp architecture: parse → eval → print.
 | `port.rb` | File I/O ports |
 | `console.rb` | REPL with optional readline support |
 | `promise.rb` | `delay`/`force` (lazy evaluation) |
-| `compat.rb` | Ruby backward-compatibility shims |
 
 **Standard library** (`lib/*.scm`): Scheme files auto-loaded at startup providing list primitives (caar/cadr/etc.), character predicates, math functions (via Ruby interop), and I/O helpers.
 
 ## Key Design Points
 
-- The `Lisp` class holds global bindings and dispatches evaluation. Special forms are registered via `Lisp.special` and built-in functions via `Lisp.defun`.
+- The `Lisp` class holds global bindings and dispatches evaluation. Special forms are registered in `@sp_forms` hash and built-in functions via `@global_binding.bind`.
 - Environments use a parent-chain model (`Binding` with `@parent`). `let`/`lambda` create child bindings.
 - Ruby interop is exposed through `ruby:eval` and `ruby:send` built-ins, used extensively in `lib/*.scm` for math and string operations.
+- `define` only supports `(define sym expr)` form, not `(define (name args) body)` shorthand.
 - The parser uses class-level `$` regex globals, which creates thread-safety issues (noted in TODO).

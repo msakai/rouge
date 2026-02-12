@@ -30,9 +30,9 @@ class Lisp
     end
 
     def []=(sym, val)
-      if @hash and @hash.has_key? sym
+      if @hash and @hash.key? sym
         bind(sym, val)
-      elsif @parent and @parent.has_key? sym
+      elsif @parent and @parent.key? sym
         @parent[sym] = val
       else
         raise "Unbounded: #{sym}"
@@ -45,8 +45,8 @@ class Lisp
       @hash
     end
 
-    def has_key?(sym)
-      (@hash and @hash.has_key? sym) or (@parent and @parent.has_key? sym)
+    def key?(sym)
+      (@hash and @hash.key? sym) or (@parent and @parent.key? sym)
     end
   end
 
