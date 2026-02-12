@@ -59,12 +59,12 @@ class Lisp
       car = read
       if peek_token == '.' then
         skip_token # skip '.'
-        retval = Cons.new(car, read)
+        Cons.new(car, read)
       else
         if peek_token == ')' then
-          retval = Cons.new(car, Null)
+          Cons.new(car, Null)
         else
-          retval = Cons.new(car, read_paren2)
+          Cons.new(car, read_paren2)
         end
       end
     end
@@ -124,7 +124,7 @@ class Lisp
     end
 
     def scan(str)
-      str.scan /(;.*)|(#?\()|(\))|(\.)|(['`])|(,@?)|("[^"\\]*(?:\\.[^"\\]*)*")|(?:#\\( |[^()\s]+))|([^()\s]+)/ do
+      str.scan(/(;.*)|(#?\()|(\))|(\.)|(['`])|(,@?)|("[^"\\]*(?:\\.[^"\\]*)*")|(?:#\\( |[^()\s]+))|([^()\s]+)/) do
         next if $1 # comment
 
         token = $2 if $2 # (sharp?) left paren
@@ -147,7 +147,7 @@ class Lisp
             token = true
           when "#f"
             token = false
-          when /^[+-]?(?:[0-9]+)?\.[0-9]*$/
+          when /^[+-]?(?:[0-9]*)\.[0-9]*$/
             token = token.to_f # floating number
           when /^[+-]?[0-9]+$/
             token = token.to_i # integer number

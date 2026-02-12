@@ -153,7 +153,7 @@ class Lisp
       _begin(new_binding, *commands)
 
       var_decls.each do |var_decl|
-        sym, init, step = var_decl
+        sym, _init, step = var_decl
         new_binding.bind(sym, evaluate(step, new_binding)) if step
       end
     end

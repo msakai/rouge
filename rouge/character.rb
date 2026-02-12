@@ -63,7 +63,7 @@ class Lisp
 
     def alphabetic?
       s = String(self)
-      (/^\w$/ === s) and (not /^\d$/ === s) and true
+      (/^\w$/ === s) and not (/^\d$/ === s) and true
     end
 
     def numeric?

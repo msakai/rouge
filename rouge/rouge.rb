@@ -88,7 +88,7 @@ class Lisp
     when Array
       '#(' + obj.collect{|item| Sexp(item)}.join(" ") + ')'
     when Numeric
-      str = String(obj)
+      String(obj)
     when String
       if dump
         obj.dump
