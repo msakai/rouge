@@ -4,6 +4,8 @@ Rubyで書いた、Lispの簡易的な処理系です。
 Schemeっぽい感じを目指していますが、仕様はいい加減です。
 2001年春学期の「記号処理プログラミング」のミニプロとして製作したものです。
 
+（その後、Ruby 3.x で動作するように、若干のアップデートを加えています）
+
 ## 使い方
 
 ```bash
@@ -37,4 +39,5 @@ Copyright (C) 2001 Masahiro Sakai.
 All rights reserved.
 This is free software with ABSOLUTELY NO WARRANTY.
 
-GPL(GNU General Public License) or Ruby's licence にて自由に配付できます。
+This is distributed freely in the sence of 
+GPL(GNU General Public License) or Ruby's licence.
