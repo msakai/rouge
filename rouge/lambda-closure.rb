@@ -20,11 +20,11 @@ class Lisp
         else
           item = vars.car
           case item
-          when '&optional'.intern
+          when :'&optional'
             state = :opt
-          when '&rest'.intern
+          when :'&rest'
             state = :rest
-          when '&aux'.intern
+          when :'&aux'
             state = :aux
           else
             case state

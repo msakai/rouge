@@ -179,21 +179,21 @@ class Lisp
       @sp_forms[sym] = method(sym)
     }
 
-    { 'unwind-protect'.intern => :unwind_protect,
-      :catch => :_catch,
-      :throw => :_throw,
-      :begin => :_begin,
-      :if => :_if,
-      :set! => :_set!,
-      :let => :let,
-      'let*'.intern => :let_star,
-      'letrec'.intern => :let_star, # XXX?
+    { 'unwind-protect': :unwind_protect,
+      catch: :_catch,
+      throw: :_throw,
+      begin: :_begin,
+      if: :_if,
+      set!: :_set!,
+      let: :let,
+      'let*': :let_star,
+      letrec: :let_star, # XXX?
       # special form で無くても良いはずだけど
-      :and => :_and,
-      :or => :_or,
-      :case => :_case,
-      :do => :_do,
-      :__symbol_list__ => :__symbol_list__, }.each { |key, val|
+      and: :_and,
+      or: :_or,
+      case: :_case,
+      do: :_do,
+      __symbol_list__: :__symbol_list__, }.each { |key, val|
       @sp_forms[key] = method(val)
     }
 

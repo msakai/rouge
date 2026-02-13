@@ -121,7 +121,7 @@ class Lisp
   end
 
   def _odd?(x)
-    x == Integer(x / 2) * 2 + 1
+    x == (Integer(x / 2) * 2) + 1
   end
 
   def _even?(x)
@@ -608,11 +608,11 @@ class Lisp
       :real? => :_real?,
       :rational? => :_rational?,
       :integer? => :_integer?,
-      '='.intern => :op_num_eql,
-      '<'.intern => :op_num_greater,
-      '>'.intern => :op_num_lesser,
-      '<='.intern => :op_num_greater_equal,
-      '>='.intern => :op_num_lesser_equal,
+      :'=' => :op_num_eql,
+      :< => :op_num_greater,
+      :> => :op_num_lesser,
+      :<= => :op_num_greater_equal,
+      :>= => :op_num_lesser_equal,
       :zero? => :_zero?,
       :positive? => :_positive?,
       :negative? => :_negative?,
@@ -620,19 +620,19 @@ class Lisp
       :even? => :_even?,
       :min => :_min,
       :max => :_max,
-      '+'.intern => :op_num_plus,
-      '-'.intern => :op_num_minus,
-      '*'.intern => :op_num_multiply,
-      '/'.intern => :op_num_divide,
+      :+ => :op_num_plus,
+      :- => :op_num_minus,
+      :* => :op_num_multiply,
+      :/ => :op_num_divide,
       :quotient => :quotient,
       :gcd => :gcd,
       :lcm => :lcm,
       # FIXME: rationalize
-      'real-part'.intern => :real_part,
-      'imag-part'.intern => :imag_part,
+      :'real-part' => :real_part,
+      :'imag-part' => :imag_part,
 
       # 数値の入出力
-      'number->string'.intern => :number_to_string,
+      :'number->string' => :number_to_string,
       # 'string->number'.intern => :string_to_number,
 
       # 論理式
@@ -643,76 +643,76 @@ class Lisp
       :pair? => :_pair?,
       :car => :car,
       :cdr => :cdr,
-      'set-car!'.intern => :set_car,
-      'set-cdr!'.intern => :set_cdr,
+      :'set-car!' => :set_car,
+      :'set-cdr!' => :set_cdr,
       :null? => :_null?,
 
       # シンボル
       :symbol? => :_symbol?,
-      'symbol->string'.intern => :symbol_to_string,
-      'string->symbol'.intern => :string_to_symbol,
+      :'symbol->string' => :symbol_to_string,
+      :'string->symbol' => :string_to_symbol,
 
       # 文字型
       :char? => :_char?,
-      'integer->char'.intern => :int_to_char,
+      :'integer->char' => :int_to_char,
 
       # 文字列
       :string? => :_string?,
-      'make-string'.intern => :make_string,
+      :'make-string' => :make_string,
       :string => :string,
-      'string-length'.intern => :string_length,
-      'string-ref'.intern => :string_ref,
-      'string-set!'.intern => :string_set,
-      'string=?'.intern => :op_string_eql,
-      'string<?'.intern => :op_string_greater,
-      'string>?'.intern => :op_string_lesser,
-      'string<=?'.intern => :op_string_greater_equal,
-      'string>=?'.intern => :op_string_lesser_equal,
-      'string-ci=?'.intern => :op_string_ci_eql,
-      'string-ci<?'.intern => :op_string_ci_greater,
-      'string-ci>?'.intern => :op_string_ci_lesser,
-      'string-ci<=?'.intern => :op_string_ci_greater_equal,
-      'string-ci>=?'.intern => :op_string_ci_lesser_equal,
-      'string-append'.intern => :string_append,
-      'string->list'.intern => :string_to_list,
-      'list->string'.intern => :list_to_string,
-      'string-copy'.intern => :string_copy,
-      'string-fill!'.intern => :string_fill,
+      :'string-length' => :string_length,
+      :'string-ref' => :string_ref,
+      :'string-set!' => :string_set,
+      :'string=?' => :op_string_eql,
+      :'string<?' => :op_string_greater,
+      :'string>?' => :op_string_lesser,
+      :'string<=?' => :op_string_greater_equal,
+      :'string>=?' => :op_string_lesser_equal,
+      :'string-ci=?' => :op_string_ci_eql,
+      :'string-ci<?' => :op_string_ci_greater,
+      :'string-ci>?' => :op_string_ci_lesser,
+      :'string-ci<=?' => :op_string_ci_greater_equal,
+      :'string-ci>=?' => :op_string_ci_lesser_equal,
+      :'string-append' => :string_append,
+      :'string->list' => :string_to_list,
+      :'list->string' => :list_to_string,
+      :'string-copy' => :string_copy,
+      :'string-fill!' => :string_fill,
 
       # ベクタ
-      'vector?'.intern => :_vector?,
-      'make-vector'.intern => :make_vector,
+      :vector? => :_vector?,
+      :'make-vector' => :make_vector,
       :vector => :vector,
-      'vector-length'.intern => :vector_length,
-      'vector-ref'.intern => :vector_ref,
-      'vector-set!'.intern => :vector_set,
-      'vector->list'.intern => :vector_to_list,
-      'list->vector'.intern => :list_to_vector,
+      :'vector-length' => :vector_length,
+      :'vector-ref' => :vector_ref,
+      :'vector-set!' => :vector_set,
+      :'vector->list' => :vector_to_list,
+      :'list->vector' => :list_to_vector,
 
       # 制御機能
       :procedure? => :_procedure?,
       # FIXME: apply, map
       # 'for-each'.intern => :_for_each.
       :force => :force,
-      'call-with-current-continuation'.intern => :call_with_current_continuation,
-      'call/cc'.intern => :call_with_current_continuation,
+      :'call-with-current-continuation' => :call_with_current_continuation,
+      :'call/cc' => :call_with_current_continuation,
 
       # Eval
       :eval => :_eval,
 
       # FIXME: port関係
-      'input-port?'.intern => :_input_port?,
-      'output-port?'.intern => :_output_port?,
-      'close-input-file'.intern => :close_input_file,
-      'close-output-file'.intern => :close_output_file,
-      'eof-object?'.intern => :_eof_object?,
+      :'input-port?' => :_input_port?,
+      :'output-port?' => :_output_port?,
+      :'close-input-file' => :close_input_file,
+      :'close-output-file' => :close_output_file,
+      :'eof-object?' => :_eof_object?,
 
       # システムインターフェース
       :load => :load,
       :bye => :bye,
       :exit => :bye,
-      'ruby:eval'.intern => :ruby_eval,
-      'ruby:send'.intern => :ruby_send,
+      :'ruby:eval' => :ruby_eval,
+      :'ruby:send' => :ruby_send,
     }.each { |key, val|
       @global_binding.bind(key, method(val))
     }
@@ -721,18 +721,18 @@ class Lisp
       @global_binding.bind(sym, Math.method(sym))
     }
     @global_binding.bind(:pi, Math::PI)
-    @global_binding.bind('*e*'.intern, Math::E)
+    @global_binding.bind(:'*e*', Math::E)
 
-    @global_binding.bind('make-rectangular'.intern, Kernel.singleton_method(:Complex))
-    @global_binding.bind('make-polar'.intern, Complex.method(:polar))
-    @global_binding.bind('*i*'.intern, Complex::I)
+    @global_binding.bind(:'make-rectangular', Kernel.singleton_method(:Complex))
+    @global_binding.bind(:'make-polar', Complex.method(:polar))
+    @global_binding.bind(:'*i*', Complex::I)
 
     @global_binding.bind(:cons, Cons.method(:new))
 
-    @global_binding.bind('make-promise'.intern, Promiss.method(:new))
+    @global_binding.bind(:'make-promise', Promiss.method(:new))
 
-    @global_binding.bind('open-input-file'.intern, InputPort.method(:new))
-    @global_binding.bind('open-output-file'.intern, OutputPort.method(:new))
+    @global_binding.bind(:'open-input-file', InputPort.method(:new))
+    @global_binding.bind(:'open-output-file', OutputPort.method(:new))
 
     [:funcall,
      :logior, :logxor, :logand, :lognot, :logbitp, :ash, :expt].each { |sym|
