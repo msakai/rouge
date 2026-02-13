@@ -98,13 +98,6 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 16
 
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-Naming/BinaryOperatorParameterName:
-  Exclude:
-    - 'rouge/list.rb'
-    - 'rouge/quote.rb'
-
 # Offense count: 2
 # Configuration parameters: ExpectMatchingDefinition, CheckDefinitionPathHierarchy, CheckDefinitionPathHierarchyRoots, Regex, IgnoreExecutableScripts, AllowedAcronyms.
 # CheckDefinitionPathHierarchyRoots: lib, spec, test, src
@@ -151,13 +144,6 @@ Naming/MethodParameterName:
 Naming/PredicateMethod:
   Exclude:
     - 'rouge/functions.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: PreferredName.
-Naming/RescuedExceptionsVariableName:
-  Exclude:
-    - 'rouge/console.rb'
 
 # Offense count: 1
 Security/Eval:

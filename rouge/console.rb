@@ -51,9 +51,9 @@ class Lisp
           if reader.buffer_empty? and val != Lisp::Unspecified
             STDOUT.puts(Lisp::Sexp(val, true))
           end
-        rescue ScriptError, StandardError => ex
-          STDOUT.puts(ex.inspect + "\n" + ex.backtrace.join("\n"))
-          reader.buffer_reset if ex.is_a? SexpReader::ParseError
+        rescue ScriptError, StandardError => e
+          STDOUT.puts(e.inspect + "\n" + e.backtrace.join("\n"))
+          reader.buffer_reset if e.is_a? SexpReader::ParseError
         end
       end
     end

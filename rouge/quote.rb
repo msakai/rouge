@@ -6,8 +6,8 @@ class Lisp
       @quoted = quoted
     end
 
-    def ==(x)
-      (x.is_a? Quote) and self.quoted == x.quoted
+    def ==(other)
+      (other.is_a? Quote) and self.quoted == other.quoted
     end
 
     def evaluate(vm_binding)
@@ -30,8 +30,8 @@ class Lisp
       @quoted = quoted
     end
 
-    def ==(x)
-      (x.is_a? BackQuote) and self.quoted == x.quoted
+    def ==(other)
+      (other.is_a? BackQuote) and self.quoted == other.quoted
     end
 
     def evaluate(vm_binding)

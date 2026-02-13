@@ -28,8 +28,8 @@ class Lisp
       @cdr = cdr
     end
 
-    def ==(x)
-      (x.is_a? Cons) and self.car == x.car and self.cdr == x.cdr
+    def ==(other)
+      (other.is_a? Cons) and self.car == other.car and self.cdr == other.cdr
     end
 
     private
