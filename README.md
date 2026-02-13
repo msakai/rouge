@@ -1,8 +1,7 @@
 # Rouge (る〜じゅ)
 
-Rubyで書いた、Lispの簡易的な処理系です。
-Schemeっぽい感じを目指していますが、仕様はいい加減です。
-2001年春学期の「記号処理プログラミング」のミニプロとして製作したものです。
+慶應義塾大学SFCの2001年春学期の「記号処理プログラミング」（担当：安村 通晃）の課題（ミニプロ）として、Rubyで実装したScheme風の簡易的なLisp処理系です。
+Schemeっぽい感じを目指していますが、仕様は厳密ではありません。
 
 （その後、Ruby 3.x で動作するように、若干のアップデートを加えています）
 
@@ -31,7 +30,7 @@ bundle exec rake test
 [RuboCop](https://rubocop.org/) を使ってコードスタイルをチェックできます。
 
 ```bash
-bundle exec rake rubocop           # lint を実行
+bundle exec rake rubocop              # lint を実行
 bundle exec rake rubocop:autocorrect  # 自動修正可能な違反を修正
 ```
 
