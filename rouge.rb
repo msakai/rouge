@@ -24,13 +24,13 @@ STDERR.write <<~EOT
 
 EOT
 
-STDERR.puts("initializing...")
+STDERR.puts('initializing...')
 
 vm = Lisp.new
 
-Dir[File.join(File.dirname(__FILE__), "lib", "*scm")].each { |item|
+Dir[File.join(File.dirname(__FILE__), 'lib', '*scm')].each do |item|
   STDERR.puts("loading #{item}")
   vm.load(item)
-}
+end
 
 Lisp::Console.run(vm)

@@ -1,13 +1,10 @@
-# coding: utf-8
-
 class Lisp
   # Rubyだと束縛対のリストよりもHashの方が楽なんで…
   class Binding
     class NotBoundedError < VMError
     end
 
-    attr_reader :vm
-    attr_reader :parent
+    attr_reader :vm, :parent
 
     def initialize(x)
       if x.is_a? Binding
@@ -21,7 +18,7 @@ class Lisp
     end
 
     def bind(sym, val)
-      raise "not a Symbol" unless sym.is_a? Symbol
+      raise 'not a Symbol' unless sym.is_a? Symbol
 
       hash[sym] = val
     end
@@ -42,7 +39,7 @@ class Lisp
     end
 
     def hash
-      @hash = ({}) unless @hash
+      @hash ||= {}
       @hash
     end
 

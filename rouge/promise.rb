@@ -1,5 +1,3 @@
-# coding: utf-8
-
 # 本当は、defineとdefine-syntaxで実装可能なんだけど、
 # syntax周りについて良く理解していないので。
 
@@ -11,11 +9,7 @@ class Lisp
     end
 
     def force
-      if @value
-        @value
-      else
-        @value = @proc.call
-      end
+      @value || @value = @proc.call
     end
 
     def to_sexp

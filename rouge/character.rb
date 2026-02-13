@@ -5,9 +5,9 @@ class Lisp
     attr_reader :num
 
     NAME_TO_CHAR = {
-      "space" => ?\s,
-      "newline" => ?\n,
-      "tab" => ?\t,
+      'space' => ?\s,
+      'newline' => ?\n,
+      'tab' => ?\t,
     }
 
     CHAR_TO_NAME = NAME_TO_CHAR.invert
@@ -17,31 +17,31 @@ class Lisp
       when Integer
         @num = obj
       when String
-        if obj.size == 1
-          @num = obj[0]
-        else
-          @num = NAME_TO_CHAR.fetch(obj) {
-            raise "Unknown character: #{obj}"
-          }
-        end
+        @num = if obj.size == 1
+                 obj[0]
+               else
+                 NAME_TO_CHAR.fetch(obj) do
+                   raise "Unknown character: #{obj}"
+                 end
+               end
       end
     end
 
     def name
-      CHAR_TO_NAME.fetch(@num) {
+      CHAR_TO_NAME.fetch(@num) do
         false
-      }
+      end
     end
 
     def to_s
-      "" << @num
+      '' << @num
     end
 
     def to_sexp
-      s = CHAR_TO_NAME.fetch(@num) {
+      s = CHAR_TO_NAME.fetch(@num) do
         String(self)
-      }
-      "#\\" + s
+      end
+      '#\\' + s
     end
 
     def upcase
@@ -62,7 +62,7 @@ class Lisp
 
     def alphabetic?
       s = String(self)
-      (/^\w$/ === s) and not (/^\d$/ === s) and true
+      (/^\w$/ === s) and !(/^\d$/ === s) and true
     end
 
     def numeric?

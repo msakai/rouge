@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "test_helper"
+require_relative 'test_helper'
 
 class TestBinding < Minitest::Test
   def setup
@@ -58,6 +58,6 @@ class TestBinding < Minitest::Test
   end
 
   def test_bind_requires_symbol
-    assert_raises(RuntimeError) { @global.bind("not_a_symbol", 1) }
+    assert_raises(RuntimeError) { @global.bind('not_a_symbol', 1) }
   end
 end

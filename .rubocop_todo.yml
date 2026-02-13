@@ -150,24 +150,6 @@ Security/Eval:
   Exclude:
     - 'rouge/functions.rb'
 
-# Offense count: 6
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: separated, grouped
-Style/AccessorGrouping:
-  Exclude:
-    - 'rouge/binding.rb'
-    - 'rouge/list.rb'
-    - 'rouge/rouge.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: prefer_alias, prefer_alias_method
-Style/Alias:
-  Exclude:
-    - 'rouge/list.rb'
-
 # Offense count: 7
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle.
@@ -178,29 +160,6 @@ Style/AndOr:
     - 'rouge/console.rb'
     - 'rouge/functions.rb'
     - 'rouge/parser.rb'
-    - 'rouge/special-forms.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/BlockComments:
-  Exclude:
-    - 'rouge/rouge.rb'
-
-# Offense count: 44
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, ProceduralMethods, FunctionalMethods, AllowedMethods, AllowedPatterns, AllowBracesOnProceduralOneLiners, BracesRequiredMethods.
-# SupportedStyles: line_count_based, semantic, braces_for_chaining, always_braces
-# ProceduralMethods: benchmark, bm, bmbm, create, each_with_object, measure, new, realtime, tap, with_object
-# FunctionalMethods: let, let!, subject, watch
-# AllowedMethods: lambda, proc, it
-Style/BlockDelimiters:
-  Exclude:
-    - 'rouge.rb'
-    - 'rouge/character.rb'
-    - 'rouge/console.rb'
-    - 'rouge/functions.rb'
-    - 'rouge/lambda-closure.rb'
-    - 'rouge/list.rb'
     - 'rouge/special-forms.rb'
 
 # Offense count: 7
@@ -222,12 +181,6 @@ Style/ClassVars:
   Exclude:
     - 'rouge/console.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Style/ColonMethodCall:
-  Exclude:
-    - 'rouge/port.rb'
-
 # Offense count: 6
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/CommentedKeyword:
@@ -236,16 +189,6 @@ Style/CommentedKeyword:
     - 'rouge/functions.rb'
     - 'rouge/parser.rb'
     - 'rouge/special-forms.rb'
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, SingleLineConditionsOnly, IncludeTernaryExpressions.
-# SupportedStyles: assign_to_condition, assign_inside_condition
-Style/ConditionalAssignment:
-  Exclude:
-    - 'rouge/character.rb'
-    - 'rouge/parser.rb'
-    - 'rouge/port.rb'
 
 # Offense count: 19
 # Configuration parameters: AllowedConstants.
@@ -262,37 +205,6 @@ Style/Documentation:
     - 'rouge/port.rb'
     - 'rouge/promise.rb'
     - 'rouge/quote.rb'
-    - 'rouge/rouge.rb'
-    - 'rouge/special-forms.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowComments.
-# SupportedStyles: empty, nil, both
-Style/EmptyElse:
-  Exclude:
-    - 'rouge/functions.rb'
-
-# Offense count: 9
-# This cop supports safe autocorrection (--autocorrect).
-Style/EmptyLiteral:
-  Exclude:
-    - 'rouge/console.rb'
-    - 'rouge/functions.rb'
-    - 'rouge/lambda-closure.rb'
-    - 'rouge/parser.rb'
-    - 'rouge/quote.rb'
-    - 'rouge/special-forms.rb'
-
-# Offense count: 7
-# This cop supports safe autocorrection (--autocorrect).
-Style/Encoding:
-  Exclude:
-    - 'rouge/binding.rb'
-    - 'rouge/functions.rb'
-    - 'rouge/list.rb'
-    - 'rouge/parser.rb'
-    - 'rouge/promise.rb'
     - 'rouge/rouge.rb'
     - 'rouge/special-forms.rb'
 
@@ -330,28 +242,6 @@ Style/GlobalStdStream:
     - 'rouge.rb'
     - 'rouge/console.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: MinBodyLength, AllowConsecutiveConditionals.
-Style/GuardClause:
-  Exclude:
-    - 'rouge/functions.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowIfModifier.
-Style/IfInsideElse:
-  Exclude:
-    - 'rouge/parser.rb'
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-Style/IfUnlessModifier:
-  Exclude:
-    - 'rouge/console.rb'
-    - 'rouge/parser.rb'
-    - 'rouge/special-forms.rb'
-
 # Offense count: 5
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/InfiniteLoop:
@@ -362,20 +252,6 @@ Style/InfiniteLoop:
     - 'rouge/rouge.rb'
     - 'rouge/special-forms.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowedMethods, AllowedPatterns.
-Style/MethodCallWithoutArgsParentheses:
-  Exclude:
-    - 'rouge/rouge.rb'
-
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-Style/MultilineIfThen:
-  Exclude:
-    - 'rouge/list.rb'
-    - 'rouge/parser.rb'
-
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle.
@@ -383,14 +259,6 @@ Style/MultilineIfThen:
 Style/MutableConstant:
   Exclude:
     - 'rouge/character.rb'
-
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-Style/Not:
-  Exclude:
-    - 'rouge/character.rb'
-    - 'rouge/functions.rb'
-    - 'rouge/parser.rb'
 
 # Offense count: 3
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -408,34 +276,6 @@ Style/OptionalBooleanParameter:
   Exclude:
     - 'rouge/rouge.rb'
 
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-Style/OrAssignment:
-  Exclude:
-    - 'rouge/binding.rb'
-    - 'rouge/lambda-closure.rb'
-    - 'rouge/port.rb'
-
-# Offense count: 19
-# This cop supports safe autocorrection (--autocorrect).
-Style/PerlBackrefs:
-  Exclude:
-    - 'rouge/parser.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantAssignment:
-  Exclude:
-    - 'rouge/parser.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowedMethods.
-# AllowedMethods: infinite?, nonzero?
-Style/RedundantCondition:
-  Exclude:
-    - 'rouge/promise.rb'
-
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: SafeForConstants.
@@ -449,21 +289,6 @@ Style/RedundantInterpolation:
   Exclude:
     - 'rouge/list.rb'
 
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantParentheses:
-  Exclude:
-    - 'rouge/binding.rb'
-    - 'rouge/lambda-closure.rb'
-    - 'rouge/rouge.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'rouge/parser.rb'
-
 # Offense count: 6
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantSelf:
@@ -472,22 +297,6 @@ Style/RedundantSelf:
     - 'rouge/quote.rb'
     - 'rouge/rouge.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowInnerSlashes.
-# SupportedStyles: slashes, percent_r, mixed
-Style/RegexpLiteral:
-  Exclude:
-    - 'rouge/parser.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: implicit, explicit
-Style/RescueStandardError:
-  Exclude:
-    - 'rouge/special-forms.rb'
-
 # Offense count: 4
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil, AllowedMethods, MaxChainLength.
@@ -495,12 +304,6 @@ Style/RescueStandardError:
 Style/SafeNavigation:
   Exclude:
     - 'rouge/binding.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/SelfAssignment:
-  Exclude:
-    - 'rouge/functions.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -519,28 +322,6 @@ Style/StringConcatenation:
     - 'rouge/quote.rb'
     - 'rouge/rouge.rb'
 
-# Offense count: 138
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Enabled: false
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: MinSize.
-# SupportedStyles: percent, brackets
-Style/SymbolArray:
-  EnforcedStyle: brackets
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowSafeAssignment.
-# SupportedStyles: require_parentheses, require_no_parentheses, require_parentheses_when_complex
-Style/TernaryParentheses:
-  Exclude:
-    - 'rouge/functions.rb'
-
 # Offense count: 3
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyleForMultiline.
@@ -549,19 +330,6 @@ Style/TrailingCommaInHashLiteral:
   Exclude:
     - 'rouge/character.rb'
     - 'rouge/functions.rb'
-    - 'rouge/special-forms.rb'
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-Style/UnlessElse:
-  Exclude:
-    - 'rouge/lambda-closure.rb'
-    - 'rouge/quote.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/WhileUntilDo:
-  Exclude:
     - 'rouge/special-forms.rb'
 
 # Offense count: 1

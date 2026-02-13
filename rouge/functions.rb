@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require_relative 'promise'
 require_relative 'port'
 
@@ -60,51 +58,51 @@ class Lisp
 
   def op_num_eql(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val == val
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_num_greater(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val < val
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_num_lesser(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val > val
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_num_lesser_equal(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val >= val
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_num_greater_equal(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val <= val
 
       last_val = val
-    }
+    end
     true
   end
 
@@ -130,17 +128,17 @@ class Lisp
 
   def _min(*args)
     val = args.shift
-    args.each { |item|
+    args.each do |item|
       val = item if item < val
-    }
+    end
     val
   end
 
   def _max(*args)
     val = args.shift
-    args.each { |item|
+    args.each do |item|
       val = item if item > val
-    }
+    end
     val
   end
 
@@ -153,9 +151,9 @@ class Lisp
       -x
     else
       result = x
-      args.each { |item|
+      args.each do |item|
         result -= item
-      }
+      end
       result
     end
   end
@@ -180,9 +178,9 @@ class Lisp
       1 / x
     else
       result = x
-      args.each { |item|
-        result = result / item
-      }
+      args.each do |item|
+        result /= item
+      end
       result
     end
   end
@@ -193,17 +191,17 @@ class Lisp
 
   def gcd(x, args)
     val = x
-    args.each { |item|
+    args.each do |item|
       val = val.gcd(item)
-    }
+    end
     val
   end
 
   def lcm(x, *args)
     val = x
-    args.each { |item|
+    args.each do |item|
       val = val.lcm(item)
-    }
+    end
     val
   end
 
@@ -235,7 +233,7 @@ class Lisp
     when 10
       String(x)
     else
-      raise "number->string: radix != 10 is not supported"
+      raise 'number->string: radix != 10 is not supported'
     end
   end
 
@@ -248,12 +246,11 @@ class Lisp
       str.hex
     when 8
       str.oct
-    else
     end
   end
 
   def _not(x)
-    not x
+    !x
   end
 
   def _boolean?(x)
@@ -310,12 +307,12 @@ class Lisp
     x.is_a? String
   end
 
-  def make_string(length, initial_char = " ")
+  def make_string(length, initial_char = ' ')
     String(initial_char) * length
   end
 
   def string(*chars)
-    result = "" * chars.size
+    result = '' * chars.size
     chars.each_with_index do |item, index|
       result[index] = item
     end
@@ -336,11 +333,11 @@ class Lisp
   end
 
   def string_append(*args)
-    args.inject("") { |result, item| result + item }
+    args.inject('') { |result, item| result + item }
   end
 
   def string_to_list(str)
-    ary = Array.new
+    ary = []
     str.each_byte do |byte|
       ary.push(Character.new(byte))
     end
@@ -348,7 +345,7 @@ class Lisp
   end
 
   def list_to_string(list)
-    result = ""
+    result = ''
     list.each do |char|
       result << Integer(char)
     end
@@ -369,101 +366,101 @@ class Lisp
 
   def op_string_eql(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val == val
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_greater(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val < val
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_lesser(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val > val
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_greater_equal(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val <= val
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_lesser_equal(*args)
     last_val = args.shift
-    args.each { |val|
+    args.each do |val|
       return false unless last_val >= val
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_eql(*args)
     last_val = args.shift.downcase
-    args.each { |val|
+    args.each do |val|
       return false unless last_val == val.downcase
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_greater(*args)
     last_val = args.shift.downcase
-    args.each { |val|
+    args.each do |val|
       return false unless last_val < val.downcase
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_lesser(*args)
     last_val = args.shift.downcase
-    args.each { |val|
+    args.each do |val|
       return false unless last_val > val.downcase
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_greater_equal(*args)
     last_val = args.shift.downcase
-    args.each { |val|
+    args.each do |val|
       return false unless last_val <= val.downcase
 
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_lesser_equal(*args)
     last_val = args.shift.downcase
-    args.each { |val|
+    args.each do |val|
       return false unless last_val >= val.downcase
 
       last_val = val
-    }
+    end
     true
   end
 
@@ -506,9 +503,9 @@ class Lisp
   end
 
   def call_with_current_continuation(proc)
-    callcc { |cont|
+    callcc do |cont|
       proc.call(cont)
-    }
+    end
   end
 
   # FIXME: グローバルな環境で評価されてしまう。その時点での環境にする。
@@ -532,16 +529,14 @@ class Lisp
     if func.is_a? LambdaClosure
       func.call_with_list(args_list)
     else
-      funcall(func, *((args_list == Null) ? [] : Array(args_list)))
+      funcall(func, *(args_list == Null ? [] : Array(args_list)))
     end
   end
 
   def funcall(func, *args)
-    if func.respond_to?(:call)
-      func.call(*args)
-    else
-      raise String(func) + " is invalid as a function."
-    end
+    raise String(func) + ' is invalid as a function.' unless func.respond_to?(:call)
+
+    func.call(*args)
   end
 
   # FIXME
@@ -713,13 +708,13 @@ class Lisp
       :exit => :bye,
       :'ruby:eval' => :ruby_eval,
       :'ruby:send' => :ruby_send,
-    }.each { |key, val|
+    }.each do |key, val|
       @global_binding.bind(key, method(val))
-    }
+    end
 
-    [:exp, :log, :sin, :cos, :tan, :sqrt].each { |sym|
+    %i[exp log sin cos tan sqrt].each do |sym|
       @global_binding.bind(sym, Math.method(sym))
-    }
+    end
     @global_binding.bind(:pi, Math::PI)
     @global_binding.bind(:'*e*', Math::E)
 
@@ -734,10 +729,10 @@ class Lisp
     @global_binding.bind(:'open-input-file', InputPort.method(:new))
     @global_binding.bind(:'open-output-file', OutputPort.method(:new))
 
-    [:funcall,
-     :logior, :logxor, :logand, :lognot, :logbitp, :ash, :expt].each { |sym|
+    %i[funcall
+       logior logxor logand lognot logbitp ash expt].each do |sym|
       @global_binding.bind(sym, method(sym))
-    }
+    end
 
     @global_binding.bind(:float, Kernel.method(:Float))
   end

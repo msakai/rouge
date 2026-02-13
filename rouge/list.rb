@@ -1,9 +1,7 @@
-# coding: utf-8
-
 class Lisp
   class << (Null = SExpObject.new)
     def to_s
-      "()"
+      '()'
     end
     alias to_s2 to_s
     alias to_sexp to_s
@@ -20,8 +18,7 @@ class Lisp
   class Cons < SExpObject
     include Enumerable
 
-    attr_accessor :car
-    attr_accessor :cdr
+    attr_accessor :car, :cdr
 
     def initialize(car, cdr)
       @car = car
@@ -37,13 +34,13 @@ class Lisp
     def eval_func_args(vm_binding)
       vm = vm_binding.vm
 
-      Cons.collect_from_list(@cdr) { |item|
+      Cons.collect_from_list(@cdr) do |item|
         if item.is_a? Cons
           vm.evaluate(item.car, vm_binding)
         else
           vm.evaluate(item, vm_binding)
         end
-      }
+      end
     end
 
     public
@@ -61,7 +58,7 @@ class Lisp
     end
 
     def _to_s2
-      if cdr.instance_of?(Cons) then
+      if cdr.instance_of?(Cons)
         "#{Lisp.Sexp(car)} #{cdr._to_s2}"
       elsif cdr == Null
         "#{Lisp.Sexp(car)}"
@@ -77,22 +74,22 @@ class Lisp
     def to_s
       to_s2
     end
-    alias :inspect :to_s
+    alias inspect to_s
 
     def to_a
       case cdr
       when Cons, Null
         Array(@cdr).unshift(@car)
       else
-        raise "Not a pure list"
+        raise 'Not a pure list'
       end
     end
 
     def self.from_a(ary)
       val = Null
-      (ary.size - 1).downto(0) { |i|
+      (ary.size - 1).downto(0) do |i|
         val = self.new(ary[i], val)
-      }
+      end
       val
     end
 

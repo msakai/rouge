@@ -4,14 +4,14 @@ class Lisp
     begin
       require 'readline'
       Readline.completion_proc = lambda do |input_str|
-        result = Array.new
+        result = []
         re = Regexp.compile('^' + Regexp.escape(input_str) + '.*')
-        [vm.global_binding.hash, vm.sp_forms].each { |hash|
-          hash.each_key { |sym|
+        [vm.global_binding.hash, vm.sp_forms].each do |hash|
+          hash.each_key do |sym|
             str = sym.to_s
             result.push(str) if re =~ str
-          }
-        }
+          end
+        end
         result
       end
       @@use_readline = true
@@ -25,10 +25,10 @@ class Lisp
 
     def gets
       if @firstline
-        prompt = "rouge> "
+        prompt = 'rouge> '
         @firstline = false
       else
-        prompt = "rouge* "
+        prompt = 'rouge* '
       end
 
       if @@use_readline
@@ -48,9 +48,7 @@ class Lisp
         begin
           @firstline = true
           val = vm.evaluate(reader.read)
-          if reader.buffer_empty? and val != Lisp::Unspecified
-            STDOUT.puts(Lisp::Sexp(val, true))
-          end
+          STDOUT.puts(Lisp::Sexp(val, true)) if reader.buffer_empty? and val != Lisp::Unspecified
         rescue ScriptError, StandardError => e
           STDOUT.puts(e.inspect + "\n" + e.backtrace.join("\n"))
           reader.buffer_reset if e.is_a? SexpReader::ParseError

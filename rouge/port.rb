@@ -19,13 +19,13 @@ class Lisp
 
   class InputPort < Port
     def initialize(filename)
-      super(File::new(filename, "rb"))
+      super(File.new(filename, 'rb'))
       @peek_char = nil
       @reader    = nil
     end
 
     def read
-      @reader = SexpReader.new(io) unless @reader
+      @reader ||= SexpReader.new(io)
       if @reader.empty?
         EOF
       else
@@ -46,18 +46,18 @@ class Lisp
         result
       else
         c = io.getc
-        if c
-          @peek_char = Character.new(c)
-        else
-          @peek_char = EOF
-        end
+        @peek_char = if c
+                       Character.new(c)
+                     else
+                       EOF
+                     end
       end
     end
   end
 
   class OutputPort < Port
     def initialize(filename)
-      super(File::new(filename, "wb"))
+      super(File.new(filename, 'wb'))
     end
 
     def write(obj)

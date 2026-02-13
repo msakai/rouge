@@ -1,5 +1,3 @@
-# coding: utf-8
-
 #############################################################################
 # パーサー
 #  modified from sexp.rb
@@ -29,7 +27,7 @@ class Lisp
     class UnexpectedToken < ParseError; end
 
     def initialize(io = nil)
-      @tokens = Array.new
+      @tokens = []
       @io = io
     end
 
@@ -39,7 +37,7 @@ class Lisp
 
     def peek_token
       while buffer_empty?
-        break if (not @io) or @io.eof?
+        break if (!@io) or @io.eof?
 
         str = @io.gets
         scan(str) if str
@@ -53,20 +51,16 @@ class Lisp
     end
 
     def read_paren2
-      if peek_token == ')' then
-        return Null
-      end
+      return Null if peek_token == ')'
 
       car = read
-      if peek_token == '.' then
+      if peek_token == '.'
         skip_token # skip '.'
         Cons.new(car, read)
+      elsif peek_token == ')'
+        Cons.new(car, Null)
       else
-        if peek_token == ')' then
-          Cons.new(car, Null)
-        else
-          Cons.new(car, read_paren2)
-        end
+        Cons.new(car, read_paren2)
       end
     end
 
@@ -78,13 +72,13 @@ class Lisp
       raise UnexpectedToken unless peek_token == ')'
 
       skip_token # )
-      return retval
+      retval
     end
 
     public
 
     def buffer_reset
-      @tokens = Array.new
+      @tokens = []
     end
 
     def buffer_empty?
@@ -92,7 +86,7 @@ class Lisp
     end
 
     def empty?
-      buffer_empty? and ((not @io) or @io.eof?)
+      buffer_empty? and ((!@io) or @io.eof?)
     end
 
     def read
@@ -111,54 +105,54 @@ class Lisp
       when "'"
         skip_token
         Quote.new(read)
-      when "`"
+      when '`'
         skip_token
         BackQuote.new(read)
-      when ","
+      when ','
         skip_token
         Unquote.new(read, false)
-      when ",@"
+      when ',@'
         skip_token
         Unquote.new(read, true)
       else
-        token = @tokens.shift
-        token
+        @tokens.shift
+
       end
     end
 
     def scan(str)
       str.scan(/(;.*)|(#?\()|(\))|(\.)|(['`])|(,@?)|("[^"\\]*(?:\\.[^"\\]*)*")|(?:#\\( |[^()\s]+))|([^()\s]+)/) do
-        next if $1 # comment
+        next if ::Regexp.last_match(1) # comment
 
-        token = $2 if $2 # (sharp?) left paren
-        token = $3 if $3 # right paren
-        token = $4 if $4 # dot
-        token = $5 if $5 # quote / back-quote
-        token = $6 if $6 # unquote / unquote-splicing
-        token = Character.new($8) if $8 # character
+        token = ::Regexp.last_match(2) if ::Regexp.last_match(2) # (sharp?) left paren
+        token = ::Regexp.last_match(3) if ::Regexp.last_match(3) # right paren
+        token = ::Regexp.last_match(4) if ::Regexp.last_match(4) # dot
+        token = ::Regexp.last_match(5) if ::Regexp.last_match(5) # quote / back-quote
+        token = ::Regexp.last_match(6) if ::Regexp.last_match(6) # unquote / unquote-splicing
+        token = Character.new(::Regexp.last_match(8)) if ::Regexp.last_match(8) # character
 
         # double-quoted string
-        if $7
-          token = $7
+        if ::Regexp.last_match(7)
+          token = ::Regexp.last_match(7)
           token = token.undump
         end
 
-        if $9
-          token = $9.downcase
-          case token
-          when "#t"
-            token = true
-          when "#f"
-            token = false
-          when /^[+-]?(?:[0-9]*)\.[0-9]*$/
-            token = token.to_f # floating number
-          when /^[+-]?[0-9]+$/
-            token = token.to_i # integer number
-          when /^([+-]?[0-9]+)\/([0-9]+)$/
-            token = Rational($1.to_i, $2.to_i) # rational number
-          else
-            token = token.intern # symbol
-          end
+        if ::Regexp.last_match(9)
+          token = ::Regexp.last_match(9).downcase
+          token = case token
+                  when '#t'
+                    true
+                  when '#f'
+                    false
+                  when /^[+-]?(?:[0-9]*)\.[0-9]*$/
+                    token.to_f # floating number
+                  when /^[+-]?[0-9]+$/
+                    token.to_i # integer number
+                  when %r{^([+-]?[0-9]+)/([0-9]+)$}
+                    Rational(::Regexp.last_match(1).to_i, ::Regexp.last_match(2).to_i) # rational number
+                  else
+                    token.intern # symbol
+                  end
         end
 
         @tokens.push(token)
