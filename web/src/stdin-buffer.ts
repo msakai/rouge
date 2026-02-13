@@ -51,9 +51,8 @@ export class StdinReader {
   /** Blocks (via Atomics.wait) until a line is available, then returns the bytes. */
   read(): Uint8Array {
     // Wait until flag becomes non-zero
-    while (Atomics.load(this.flag, FLAG_INDEX) === 0) {
-      Atomics.wait(this.flag, FLAG_INDEX, 0);
-    }
+    Atomics.wait(this.flag, FLAG_INDEX, 0);
+
     const len = Atomics.load(this.flag, LENGTH_INDEX);
     const result = new Uint8Array(len);
     result.set(this.data.subarray(0, len));
