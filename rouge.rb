@@ -10,17 +10,17 @@
 require_relative 'rouge/rouge'
 require_relative 'rouge/console'
 
-STDERR.write <<EOT
-==============================================================
-Rouge - Lisp Interpriter written in Ruby
+STDERR.write <<~EOT
+  ==============================================================
+  Rouge - Lisp Interpriter written in Ruby
 
-Copyright (C) 2001 Masahiro Sakai
-    All rights reserved.
-    This is free software with ABSOLUTELY NO WARRANTY.
+  Copyright (C) 2001 Masahiro Sakai
+      All rights reserved.
+      This is free software with ABSOLUTELY NO WARRANTY.
 
-This is distributed freely in the sence of
-GPL(GNU General Public License) or Ruby's licence.
-==============================================================
+  This is distributed freely in the sence of
+  GPL(GNU General Public License) or Ruby's licence.
+  ==============================================================
 
 EOT
 
@@ -28,7 +28,7 @@ STDERR.puts("initializing...")
 
 vm = Lisp.new
 
-Dir[File.join(File.dirname(__FILE__), "lib", "*scm")].each{|item|
+Dir[File.join(File.dirname(__FILE__), "lib", "*scm")].each { |item|
   STDERR.puts("loading #{item}")
   vm.load(item)
 }

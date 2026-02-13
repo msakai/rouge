@@ -1,7 +1,5 @@
 class Lisp
-
   class LambdaClosure < SExpObject
-
     def initialize(vm_binding, vars, *forms)
       @vm_binding = vm_binding
       @forms      = forms
@@ -16,6 +14,7 @@ class Lisp
       while vars != Null
         unless vars.is_a? Cons
           raise "&rest value is already used" if @rest_var
+
           @rest_var = vars
           break
         else
@@ -33,6 +32,7 @@ class Lisp
               @vars.push(item)
             when :rest
               raise "multiple &rest" if @rest_var
+
               @rest_var = item
             when :opt
               @opt_vars.push(item)
@@ -45,18 +45,18 @@ class Lisp
       end
     end
 
-
     def call_with_list(list)
       vm = @vm_binding.vm
       new_binding = Binding.new(@vm_binding)
 
-      @vars.each{ |item|
+      @vars.each { |item|
         raise ArgumentError, "too few arguments" unless list.is_a? Cons
+
         new_binding.bind(item, vm.car(list))
         list = vm.cdr(list)
       }
 
-      @opt_vars.each{ |item|
+      @opt_vars.each { |item|
         if list.is_a? Cons
           var_val = list.car
           list    = list.cdr
@@ -82,7 +82,7 @@ class Lisp
         raise ArgumentError, "too many arguments"
       end
 
-      @aux_vars.each{ |item|
+      @aux_vars.each { |item|
         if item.is_a? Cons
           var_name = item.car
           var_val  = item.cdr.car
@@ -96,18 +96,16 @@ class Lisp
       vm._begin(new_binding, *(@forms))
     end
 
-
     def call(*args)
       call_with_list(Cons.from_a(args))
     end
 
     # FIXME
-    #def to_list
-    #end
+    # def to_list
+    # end
 
     def to_sexp
       "#<procedure #{__id__}>"
     end
   end
-
 end

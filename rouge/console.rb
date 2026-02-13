@@ -1,18 +1,13 @@
-
-
 class Lisp
-
   module Console
-
     @@use_readline = false
     begin
       require 'readline'
-      Readline.completion_proc = lambda do
-        |input_str|
+      Readline.completion_proc = lambda do |input_str|
         result = Array.new
         re = Regexp.compile('^' + Regexp.escape(input_str) + '.*')
-        [vm.global_binding.hash, vm.sp_forms].each{|hash|
-          hash.each_key{|sym|
+        [vm.global_binding.hash, vm.sp_forms].each { |hash|
+          hash.each_key { |sym|
             str = sym.to_s
             result.push(str) if re =~ str
           }
@@ -27,7 +22,6 @@ class Lisp
       false
     end
     module_function :eof?
-
 
     def gets
       if @firstline
@@ -45,7 +39,6 @@ class Lisp
       end
     end
     module_function :gets
-
 
     def run(vm)
       @vm = vm
@@ -66,12 +59,9 @@ class Lisp
     end
     module_function :run
 
-
     def vm
       @vm
     end
     module_function :vm
-
   end # Console
-
 end # Lisp

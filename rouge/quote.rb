@@ -1,5 +1,4 @@
 class Lisp
-
   class Quote < SExpObject
     attr_reader :quoted
 
@@ -23,7 +22,6 @@ class Lisp
       "'" + Lisp.Sexp(@quoted)
     end
   end
-
 
   class BackQuote < SExpObject
     attr_reader :quoted
@@ -66,7 +64,6 @@ class Lisp
     end
   end
 
-
   class Unquote < SExpObject
     def initialize(content, splicing)
       @content  = content
@@ -91,5 +88,4 @@ class Lisp
       end
     end
   end
-
 end

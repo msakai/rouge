@@ -1,4 +1,5 @@
 # coding: utf-8
+
 #############################################################################
 # パーサー
 #  modified from sexp.rb
@@ -19,8 +20,6 @@
 #############################################################################
 
 class Lisp
-
-
   class SexpReader
     class ParseError < RuntimeError; end
 
@@ -41,6 +40,7 @@ class Lisp
     def peek_token
       while buffer_empty?
         break if (not @io) or @io.eof?
+
         str = @io.gets
         scan(str) if str
       end
@@ -56,6 +56,7 @@ class Lisp
       if peek_token == ')' then
         return Null
       end
+
       car = read
       if peek_token == '.' then
         skip_token # skip '.'
@@ -71,9 +72,11 @@ class Lisp
 
     def read_paren
       raise UnexpectedToken unless peek_token == '('
-      skip_token  # (
+
+      skip_token # (
       retval = read_paren2
       raise UnexpectedToken unless peek_token == ')'
+
       skip_token # )
       return retval
     end
@@ -163,7 +166,5 @@ class Lisp
 
       self
     end
-
   end # class SexpReader
-
 end # class Lisp

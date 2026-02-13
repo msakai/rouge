@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2001 Masahiro Sakai
 #     All rights reserved.
 #     This is free software with ABSOLUTELY NO WARRANTY.
@@ -7,7 +8,6 @@
 # GPL(GNU General Public License) or Ruby's licence.
 
 class Lisp
-
   class VMError < RuntimeError
   end
 
@@ -25,8 +25,7 @@ class Lisp
     end
   end
 
-
-  class <<(Unspecified = Object.new)
+  class << (Unspecified = Object.new)
     def inspect
       "<unspecified>"
     end
@@ -56,6 +55,7 @@ class Lisp
     when Symbol
       val = vm_binding[obj]
       raise Binding::NotBoundedError, format("%s is not bounded", obj.to_s) unless val
+
       val
     else
       obj
@@ -86,7 +86,7 @@ class Lisp
     when FalseClass
       '#f'
     when Array
-      '#(' + obj.collect{|item| Sexp(item)}.join(" ") + ')'
+      '#(' + obj.collect { |item| Sexp(item) }.join(" ") + ')'
     when Numeric
       String(obj)
     when String
@@ -104,9 +104,9 @@ class Lisp
     self.class.Sexp(obj, dump)
   end
 
-  #############################################################################
-  # ユーティリティー等
-  #############################################################################
+#############################################################################
+# ユーティリティー等
+#############################################################################
 =begin
   def binding_cutter(callable)
     lambda{ |binding, *args|
@@ -114,7 +114,6 @@ class Lisp
     }
   end
 =end
-
 end
 
 require_relative 'binding'

@@ -1,6 +1,6 @@
 # coding: utf-8
-class Lisp
 
+class Lisp
   # Rubyだと束縛対のリストよりもHashの方が楽なんで…
   class Binding
     class NotBoundedError < VMError
@@ -22,6 +22,7 @@ class Lisp
 
     def bind(sym, val)
       raise "not a Symbol" unless sym.is_a? Symbol
+
       hash[sym] = val
     end
 
@@ -49,5 +50,4 @@ class Lisp
       (@hash and @hash.key? sym) or (@parent and @parent.key? sym)
     end
   end
-
 end

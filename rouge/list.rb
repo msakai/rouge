@@ -1,7 +1,7 @@
 # coding: utf-8
-class Lisp
 
-  class <<(Null = SExpObject.new)
+class Lisp
+  class << (Null = SExpObject.new)
     def to_s
       "()"
     end
@@ -16,7 +16,6 @@ class Lisp
       self
     end
   end
-
 
   class Cons < SExpObject
     include Enumerable
@@ -36,9 +35,9 @@ class Lisp
     private
 
     def eval_func_args(vm_binding)
-      vm  = vm_binding.vm
+      vm = vm_binding.vm
 
-      Cons.collect_from_list(@cdr){|item|
+      Cons.collect_from_list(@cdr) { |item|
         if item.is_a? Cons
           vm.evaluate(item.car, vm_binding)
         else
@@ -50,7 +49,7 @@ class Lisp
     public
 
     def evaluate(vm_binding)
-      vm  = vm_binding.vm
+      vm = vm_binding.vm
 
       if vm.sp_forms.key?(@car)
         vm.sp_forms[@car].call(vm_binding, *Array(@cdr))
@@ -91,7 +90,7 @@ class Lisp
 
     def self.from_a(ary)
       val = Null
-      (ary.size - 1).downto(0){|i|
+      (ary.size - 1).downto(0) { |i|
         val = self.new(ary[i], val)
       }
       val
@@ -122,10 +121,10 @@ class Lisp
       while true
         yield tmp
         break unless tmp.is_a? Cons
+
         tmp = tmp.cdr
       end
     end
-
 
     def self.collect_from_list(x, &block)
       case x
@@ -137,8 +136,5 @@ class Lisp
         yield(x)
       end
     end
-
   end
-
-
 end

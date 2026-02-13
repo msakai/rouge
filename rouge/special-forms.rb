@@ -7,7 +7,7 @@ class Lisp
 
   def block(vm_binding, name, *forms)
     # FIXME
-    vm_binding.push_block{
+    vm_binding.push_block {
     }
   end
 
@@ -39,7 +39,7 @@ class Lisp
 
   def let(vm_binding, vars, *forms)
     new_binding = Binding.new(vm_binding)
-    vars.each{ |item|
+    vars.each { |item|
       new_binding.bind(item.car, evaluate(item.cdr.car, vm_binding))
     }
     _begin(new_binding, *forms)
@@ -47,7 +47,7 @@ class Lisp
 
   def let_star(vm_binding, vars, *forms)
     new_binding = Binding.new(vm_binding)
-    vars.each{ |item|
+    vars.each { |item|
       new_binding.bind(item.car, evaluate(item.cdr.car, new_binding))
     }
     _begin(new_binding, *forms)
@@ -55,7 +55,7 @@ class Lisp
 
   def _begin(vm_binding, *forms)
     val = Unspecified
-    forms.each{|form|
+    forms.each { |form|
       val = evaluate(form, vm_binding)
     }
     val
@@ -82,10 +82,9 @@ class Lisp
     Unspecified
   end
 
-
   def _and(vm_binding, *forms)
     val = true
-    forms.each{ |form|
+    forms.each { |form|
       val = evaluate(form, vm_binding)
       return val unless val
     }
@@ -94,7 +93,7 @@ class Lisp
 
   def _or(vm_binding, *forms)
     val = false
-    forms.each{ |form|
+    forms.each { |form|
       val = evaluate(form, vm_binding)
       return val if val
     }
@@ -130,8 +129,7 @@ class Lisp
   end
 
   def _do(vm_binding, *forms)
-    var_decls  = Array(forms.shift).collect do
-      |item|
+    var_decls = Array(forms.shift).collect do |item|
       Array(item)
     end
 
@@ -177,26 +175,25 @@ class Lisp
   private
 
   def define_sp_forms
-    [:let, :quote, :define, :eval, :delay, :cond].each{ |sym|
+    [:let, :quote, :define, :eval, :delay, :cond].each { |sym|
       @sp_forms[sym] = method(sym)
     }
 
     { 'unwind-protect'.intern => :unwind_protect,
-      :catch   => :_catch,
-      :throw   => :_throw,
-      :begin   => :_begin,
-      :if      => :_if,
-      :set!    => :_set!,
-      :let     => :let,
-      'let*'.intern   => :let_star,
+      :catch => :_catch,
+      :throw => :_throw,
+      :begin => :_begin,
+      :if => :_if,
+      :set! => :_set!,
+      :let => :let,
+      'let*'.intern => :let_star,
       'letrec'.intern => :let_star, # XXX?
       # special form で無くても良いはずだけど
-      :and     => :_and,
-      :or      => :_or,
-      :case    => :_case,
-      :do      => :_do,
-      :__symbol_list__ => :__symbol_list__,
-    }.each{ |key, val|
+      :and => :_and,
+      :or => :_or,
+      :case => :_case,
+      :do => :_do,
+      :__symbol_list__ => :__symbol_list__, }.each { |key, val|
       @sp_forms[key] = method(val)
     }
 
@@ -210,5 +207,4 @@ class Lisp
     # @sp_forms['multiple-value-prog1'.intern]
     # @sp_forms['return-from'.intern]
   end
-
 end # class Lisp

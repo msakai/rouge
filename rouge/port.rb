@@ -1,6 +1,4 @@
-
 class Lisp
-
   class Port
     EOF = Object.new
 
@@ -77,7 +75,6 @@ class Lisp
     end
   end
 
-
   def _input_port?(obj)
     obj.is_a? InputPort
   end
@@ -103,6 +100,7 @@ class Lisp
     while true
       obj = port.read
       break if obj == Port::EOF
+
       evaluate(obj)
     end
     Unspecified

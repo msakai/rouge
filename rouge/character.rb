@@ -1,14 +1,13 @@
 class Lisp
-
   class Character < SExpObject
     include Comparable
 
     attr_reader :num
 
     NAME_TO_CHAR = {
-      "space"   => ?\s,
+      "space" => ?\s,
       "newline" => ?\n,
-      "tab"     => ?\t,
+      "tab" => ?\t,
     }
 
     CHAR_TO_NAME = NAME_TO_CHAR.invert
@@ -21,7 +20,7 @@ class Lisp
         if obj.size == 1
           @num = obj[0]
         else
-          @num = NAME_TO_CHAR.fetch(obj){
+          @num = NAME_TO_CHAR.fetch(obj) {
             raise "Unknown character: #{obj}"
           }
         end
@@ -82,5 +81,4 @@ class Lisp
       @num.between(?a, ?z)
     end
   end
-
 end

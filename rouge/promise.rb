@@ -4,7 +4,6 @@
 # syntax周りについて良く理解していないので。
 
 class Lisp
-
   class Promiss < SExpObject
     def initialize(proc)
       @proc  = proc
@@ -31,5 +30,4 @@ class Lisp
       obj
     end
   end
-
 end
