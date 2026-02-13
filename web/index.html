@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rouge - Scheme Interpreter</title>
+    <script src="/coi-serviceworker.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #1e1e1e;
+        overflow: hidden;
+      }
+      #terminal {
+        width: 100vw;
+        height: 100vh;
+      }
+      #loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #ccc;
+        font-family: monospace;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading">Loading Ruby WASM runtime...</div>
+    <div id="terminal"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
