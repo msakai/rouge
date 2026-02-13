@@ -31,11 +31,13 @@ class Lisp
         prompt = 'rouge* '
       end
 
-      if @@use_readline
+      if @@use_readline && $stdin.tty? && $stdout.tty?
         Readline.readline(prompt, true)
+      elsif $stdin.tty? && $stdout.tty?
+        $stdout.write(prompt)
+        $stdin.gets
       else
-        STDOUT.write(prompt)
-        STDIN.gets
+        $stdin.gets
       end
     end
     module_function :gets
@@ -48,9 +50,9 @@ class Lisp
         begin
           @firstline = true
           val = vm.evaluate(reader.read)
-          STDOUT.puts(Lisp::Sexp(val, true)) if reader.buffer_empty? and val != Lisp::Unspecified
+          $stdout.puts(Lisp::Sexp(val, true)) if reader.buffer_empty? and val != Lisp::Unspecified
         rescue ScriptError, StandardError => e
-          STDOUT.puts(e.inspect + "\n" + e.backtrace.join("\n"))
+          $stdout.puts(e.inspect + "\n" + e.backtrace.join("\n"))
           reader.buffer_reset if e.is_a? SexpReader::ParseError
         end
       end
