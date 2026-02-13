@@ -23,6 +23,9 @@ const libScmFiles = import.meta.glob("../../lib/*.scm", {
 // Import the WASM entry point
 import rougeEntryRaw from "./rouge-entry.rb?raw";
 
+// Import Ruby WASM binary — Vite copies it to dist/assets/ and returns the URL
+import rubyWasmUrl from "@ruby/3.4-wasm-wasi/dist/ruby+stdlib.wasm?url";
+
 /**
  * Custom stdin Fd that blocks on SharedArrayBuffer via Atomics.wait.
  */
@@ -166,13 +169,7 @@ async function startRuby() {
 
   msg("Downloading Ruby WASM runtime...");
 
-  // Resolve WASM URL relative to the page origin
-  const wasmUrl = new URL(
-    "/node_modules/@ruby/3.4-wasm-wasi/dist/ruby+stdlib.wasm",
-    self.location.origin
-  ).href;
-
-  const response = await fetch(wasmUrl);
+  const response = await fetch(rubyWasmUrl);
   if (!response.ok) {
     throw new Error(`Failed to fetch Ruby WASM: ${response.statusText}`);
   }
