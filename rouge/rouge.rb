@@ -1,4 +1,3 @@
-# coding: utf-8
 # Copyright (C) 2001 Masahiro Sakai
 #     All rights reserved.
 #     This is free software with ABSOLUTELY NO WARRANTY.
@@ -7,7 +6,6 @@
 # GPL(GNU General Public License) or Ruby's licence.
 
 class Lisp
-
   class VMError < RuntimeError
   end
 
@@ -25,10 +23,9 @@ class Lisp
     end
   end
 
-
-  class <<(Unspecified = Object.new)
+  class << (Unspecified = Object.new)
     def inspect
-      "<unspecified>"
+      '<unspecified>'
     end
   end
 
@@ -36,15 +33,14 @@ class Lisp
   # インタプリタ本体
   #############################################################################
 
-  attr_reader :global_binding
-  attr_reader :sp_forms
+  attr_reader :global_binding, :sp_forms
 
   def initialize
-    @sp_forms = ({})
+    @sp_forms = {}
     @global_binding = Binding.new(self)
 
-    define_sp_forms()
-    define_builtin_symbols()
+    define_sp_forms
+    define_builtin_symbols
   end
 
   ########
@@ -55,7 +51,8 @@ class Lisp
       obj.evaluate(vm_binding)
     when Symbol
       val = vm_binding[obj]
-      raise Binding::NotBoundedError, format("%s is not bounded", obj.to_s) unless val
+      raise Binding::NotBoundedError, format('%s is not bounded', obj.to_s) unless val
+
       val
     else
       obj
@@ -86,7 +83,7 @@ class Lisp
     when FalseClass
       '#f'
     when Array
-      '#(' + obj.collect{|item| Sexp(item)}.join(" ") + ')'
+      '#(' + obj.collect { |item| Sexp(item) }.join(' ') + ')'
     when Numeric
       String(obj)
     when String
@@ -107,14 +104,12 @@ class Lisp
   #############################################################################
   # ユーティリティー等
   #############################################################################
-=begin
-  def binding_cutter(callable)
-    lambda{ |binding, *args|
-      callable.call(*args)
-    }
-  end
-=end
 
+  #   def binding_cutter(callable)
+  #     lambda{ |binding, *args|
+  #       callable.call(*args)
+  #     }
+  #   end
 end
 
 require_relative 'binding'

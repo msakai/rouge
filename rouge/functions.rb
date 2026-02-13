@@ -1,10 +1,7 @@
-# coding: utf-8
-
 require_relative 'promise'
 require_relative 'port'
 
 class Lisp
-
   #############################################################################
   # Substance of built-in functions
   #############################################################################
@@ -61,46 +58,51 @@ class Lisp
 
   def op_num_eql(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val == val
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_num_greater(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val < val
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_num_lesser(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val > val
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_num_lesser_equal(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val >= val
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_num_greater_equal(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val <= val
+
       last_val = val
-    }
+    end
     true
   end
 
@@ -117,7 +119,7 @@ class Lisp
   end
 
   def _odd?(x)
-    x == Integer(x / 2) * 2 + 1
+    x == (Integer(x / 2) * 2) + 1
   end
 
   def _even?(x)
@@ -126,22 +128,22 @@ class Lisp
 
   def _min(*args)
     val = args.shift
-    args.each{|item|
+    args.each do |item|
       val = item if item < val
-    }
+    end
     val
   end
 
   def _max(*args)
     val = args.shift
-    args.each{|item|
+    args.each do |item|
       val = item if item > val
-    }
+    end
     val
   end
 
   def op_num_plus(*args)
-    args.inject(0){|result, item| result + item}
+    args.inject(0) { |result, item| result + item }
   end
 
   def op_num_minus(x, *args)
@@ -149,15 +151,15 @@ class Lisp
       -x
     else
       result = x
-      args.each{|item|
+      args.each do |item|
         result -= item
-      }
+      end
       result
     end
   end
 
   def op_num_multiply(*args)
-    args.inject(1){|result, item| result * item}
+    args.inject(1) { |result, item| result * item }
   end
 
   # XXX
@@ -176,9 +178,9 @@ class Lisp
       1 / x
     else
       result = x
-      args.each{ |item|
-        result = result / item
-      }
+      args.each do |item|
+        result /= item
+      end
       result
     end
   end
@@ -189,17 +191,17 @@ class Lisp
 
   def gcd(x, args)
     val = x
-    args.each{|item|
+    args.each do |item|
       val = val.gcd(item)
-    }
+    end
     val
   end
 
   def lcm(x, *args)
     val = x
-    args.each{|item|
+    args.each do |item|
       val = val.lcm(item)
-    }
+    end
     val
   end
 
@@ -207,7 +209,7 @@ class Lisp
   # end
 
   def expt(base, x)
-    base ** x
+    base**x
   end
 
   def real_part(x)
@@ -231,7 +233,7 @@ class Lisp
     when 10
       String(x)
     else
-      raise "number->string: radix != 10 is not supported"
+      raise 'number->string: radix != 10 is not supported'
     end
   end
 
@@ -244,12 +246,11 @@ class Lisp
       str.hex
     when 8
       str.oct
-    else
     end
   end
 
   def _not(x)
-    not x
+    !x
   end
 
   def _boolean?(x)
@@ -306,12 +307,12 @@ class Lisp
     x.is_a? String
   end
 
-  def make_string(length, initial_char = " ")
+  def make_string(length, initial_char = ' ')
     String(initial_char) * length
   end
 
   def string(*chars)
-    result = "" * chars.size
+    result = '' * chars.size
     chars.each_with_index do |item, index|
       result[index] = item
     end
@@ -332,11 +333,11 @@ class Lisp
   end
 
   def string_append(*args)
-    args.inject(""){|result, item| result + item}
+    args.inject('') { |result, item| result + item }
   end
 
   def string_to_list(str)
-    ary = Array.new
+    ary = []
     str.each_byte do |byte|
       ary.push(Character.new(byte))
     end
@@ -344,7 +345,7 @@ class Lisp
   end
 
   def list_to_string(list)
-    result = ""
+    result = ''
     list.each do |char|
       result << Integer(char)
     end
@@ -365,91 +366,101 @@ class Lisp
 
   def op_string_eql(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val == val
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_greater(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val < val
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_lesser(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val > val
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_greater_equal(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val <= val
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_lesser_equal(*args)
     last_val = args.shift
-    args.each{|val|
+    args.each do |val|
       return false unless last_val >= val
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_eql(*args)
     last_val = args.shift.downcase
-    args.each{|val|
+    args.each do |val|
       return false unless last_val == val.downcase
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_greater(*args)
     last_val = args.shift.downcase
-    args.each{|val|
+    args.each do |val|
       return false unless last_val < val.downcase
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_lesser(*args)
     last_val = args.shift.downcase
-    args.each{|val|
+    args.each do |val|
       return false unless last_val > val.downcase
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_greater_equal(*args)
     last_val = args.shift.downcase
-    args.each{|val|
+    args.each do |val|
       return false unless last_val <= val.downcase
+
       last_val = val
-    }
+    end
     true
   end
 
   def op_string_ci_lesser_equal(*args)
     last_val = args.shift.downcase
-    args.each{|val|
+    args.each do |val|
       return false unless last_val >= val.downcase
+
       last_val = val
-    }
+    end
     true
   end
 
@@ -492,9 +503,9 @@ class Lisp
   end
 
   def call_with_current_continuation(proc)
-    callcc{|cont|
+    callcc do |cont|
       proc.call(cont)
-    }
+    end
   end
 
   # FIXME: グローバルな環境で評価されてしまう。その時点での環境にする。
@@ -518,16 +529,14 @@ class Lisp
     if func.is_a? LambdaClosure
       func.call_with_list(args_list)
     else
-      funcall(func, *((args_list == Null) ? [] : Array(args_list)))
+      funcall(func, *(args_list == Null ? [] : Array(args_list)))
     end
   end
 
   def funcall(func, *args)
-    if func.respond_to?(:call)
-      func.call(*args)
-    else
-      raise String(func) + " is invalid as a function."
-    end
+    raise String(func) + ' is invalid as a function.' unless func.respond_to?(:call)
+
+    func.call(*args)
   end
 
   # FIXME
@@ -541,18 +550,18 @@ class Lisp
   # logcount. integer-length
 
   def logior(*args)
-    args.inject(0){|result, item| result | item}
+    args.inject(0) { |result, item| result | item }
   end
 
   def logxor(*args)
-    args.inject(0){|result, item| result ^ item}
+    args.inject(0) { |result, item| result ^ item }
   end
 
   def logand(*args)
     if args.empty?
       -1
     else
-      args.inject(1){|result, item| result & item}
+      args.inject(1) { |result, item| result & item }
     end
   end
 
@@ -582,152 +591,149 @@ class Lisp
 
     {
       # 同値を調べる述語手続き
-      :eq?    => :_eq?,
-      :eqv?   => :_eqv?,
+      :eq? => :_eq?,
+      :eqv? => :_eqv?,
       :equal? => :_equal?,
 
       # 数値演算
       # FIXME: 仕様に厳密でないので、後で修正する
-      :number?    => :_number?,
-      :complex?   => :_complex?,
-      :float?     => :_float?,
-      :real?      => :_real?,
-      :rational?  => :_rational?,
-      :integer?   => :_integer?,
-      '='.intern  => :op_num_eql,
-      '<'.intern  => :op_num_greater,
-      '>'.intern  => :op_num_lesser,
-      '<='.intern => :op_num_greater_equal,
-      '>='.intern => :op_num_lesser_equal,
-      :zero?      => :_zero?,
-      :positive?  => :_positive?,
-      :negative?  => :_negative?,
-      :odd?       => :_odd?,
-      :even?      => :_even?,
-      :min        => :_min,
-      :max        => :_max,
-      '+'.intern  => :op_num_plus,
-      '-'.intern  => :op_num_minus,
-      '*'.intern  => :op_num_multiply,
-      '/'.intern  => :op_num_divide,
-      :quotient   => :quotient,
-      :gcd        => :gcd,
-      :lcm        => :lcm,
+      :number? => :_number?,
+      :complex? => :_complex?,
+      :float? => :_float?,
+      :real? => :_real?,
+      :rational? => :_rational?,
+      :integer? => :_integer?,
+      :'=' => :op_num_eql,
+      :< => :op_num_greater,
+      :> => :op_num_lesser,
+      :<= => :op_num_greater_equal,
+      :>= => :op_num_lesser_equal,
+      :zero? => :_zero?,
+      :positive? => :_positive?,
+      :negative? => :_negative?,
+      :odd? => :_odd?,
+      :even? => :_even?,
+      :min => :_min,
+      :max => :_max,
+      :+ => :op_num_plus,
+      :- => :op_num_minus,
+      :* => :op_num_multiply,
+      :/ => :op_num_divide,
+      :quotient => :quotient,
+      :gcd => :gcd,
+      :lcm => :lcm,
       # FIXME: rationalize
-      'real-part'.intern  => :real_part,
-      'imag-part'.intern  => :imag_part,
+      :'real-part' => :real_part,
+      :'imag-part' => :imag_part,
 
       # 数値の入出力
-      'number->string'.intern => :number_to_string,
-      #'string->number'.intern => :string_to_number,
+      :'number->string' => :number_to_string,
+      # 'string->number'.intern => :string_to_number,
 
       # 論理式
-      :not      => :_not,
+      :not => :_not,
       :boolean? => :_boolean?,
 
       # ペアとリスト
       :pair? => :_pair?,
-      :car   => :car,
-      :cdr   => :cdr,
-      'set-car!'.intern => :set_car,
-      'set-cdr!'.intern => :set_cdr,
+      :car => :car,
+      :cdr => :cdr,
+      :'set-car!' => :set_car,
+      :'set-cdr!' => :set_cdr,
       :null? => :_null?,
 
       # シンボル
       :symbol? => :_symbol?,
-      'symbol->string'.intern => :symbol_to_string,
-      'string->symbol'.intern => :string_to_symbol,
+      :'symbol->string' => :symbol_to_string,
+      :'string->symbol' => :string_to_symbol,
 
       # 文字型
       :char? => :_char?,
-      'integer->char'.intern => :int_to_char,
+      :'integer->char' => :int_to_char,
 
       # 文字列
       :string? => :_string?,
-      'make-string'.intern => :make_string,
-      :string               => :string,
-      'string-length'.intern => :string_length,
-      'string-ref'.intern   => :string_ref,
-      'string-set!'.intern  => :string_set,
-      'string=?'.intern     => :op_string_eql,
-      'string<?'.intern     => :op_string_greater,
-      'string>?'.intern     => :op_string_lesser,
-      'string<=?'.intern    => :op_string_greater_equal,
-      'string>=?'.intern    => :op_string_lesser_equal,
-      'string-ci=?'.intern  => :op_string_ci_eql,
-      'string-ci<?'.intern  => :op_string_ci_greater,
-      'string-ci>?'.intern  => :op_string_ci_lesser,
-      'string-ci<=?'.intern => :op_string_ci_greater_equal,
-      'string-ci>=?'.intern => :op_string_ci_lesser_equal,
-      'string-append'.intern => :string_append,
-      'string->list'.intern => :string_to_list,
-      'list->string'.intern => :list_to_string,
-      'string-copy'.intern  => :string_copy,
-      'string-fill!'.intern => :string_fill,
+      :'make-string' => :make_string,
+      :string => :string,
+      :'string-length' => :string_length,
+      :'string-ref' => :string_ref,
+      :'string-set!' => :string_set,
+      :'string=?' => :op_string_eql,
+      :'string<?' => :op_string_greater,
+      :'string>?' => :op_string_lesser,
+      :'string<=?' => :op_string_greater_equal,
+      :'string>=?' => :op_string_lesser_equal,
+      :'string-ci=?' => :op_string_ci_eql,
+      :'string-ci<?' => :op_string_ci_greater,
+      :'string-ci>?' => :op_string_ci_lesser,
+      :'string-ci<=?' => :op_string_ci_greater_equal,
+      :'string-ci>=?' => :op_string_ci_lesser_equal,
+      :'string-append' => :string_append,
+      :'string->list' => :string_to_list,
+      :'list->string' => :list_to_string,
+      :'string-copy' => :string_copy,
+      :'string-fill!' => :string_fill,
 
       # ベクタ
-      'vector?'.intern       => :_vector?,
-      'make-vector'.intern   => :make_vector,
+      :vector? => :_vector?,
+      :'make-vector' => :make_vector,
       :vector => :vector,
-      'vector-length'.intern => :vector_length,
-      'vector-ref'.intern    => :vector_ref,
-      'vector-set!'.intern   => :vector_set,
-      'vector->list'.intern  => :vector_to_list,
-      'list->vector'.intern  => :list_to_vector,
+      :'vector-length' => :vector_length,
+      :'vector-ref' => :vector_ref,
+      :'vector-set!' => :vector_set,
+      :'vector->list' => :vector_to_list,
+      :'list->vector' => :list_to_vector,
 
       # 制御機能
       :procedure? => :_procedure?,
       # FIXME: apply, map
       # 'for-each'.intern => :_for_each.
       :force => :force,
-      'call-with-current-continuation'.intern => :call_with_current_continuation,
-      'call/cc'.intern => :call_with_current_continuation,
+      :'call-with-current-continuation' => :call_with_current_continuation,
+      :'call/cc' => :call_with_current_continuation,
 
       # Eval
       :eval => :_eval,
 
       # FIXME: port関係
-      'input-port?'.intern  => :_input_port?,
-      'output-port?'.intern => :_output_port?,
-      'close-input-file'.intern  => :close_input_file,
-      'close-output-file'.intern => :close_output_file,
-      'eof-object?'.intern => :_eof_object?,
+      :'input-port?' => :_input_port?,
+      :'output-port?' => :_output_port?,
+      :'close-input-file' => :close_input_file,
+      :'close-output-file' => :close_output_file,
+      :'eof-object?' => :_eof_object?,
 
       # システムインターフェース
       :load => :load,
-      :bye  => :bye,
+      :bye => :bye,
       :exit => :bye,
-      'ruby:eval'.intern => :ruby_eval,
-      'ruby:send'.intern => :ruby_send,
-    }.each{
-      |key, val|
+      :'ruby:eval' => :ruby_eval,
+      :'ruby:send' => :ruby_send,
+    }.each do |key, val|
       @global_binding.bind(key, method(val))
-    }
+    end
 
-    [:exp, :log, :sin, :cos, :tan, :sqrt].each{|sym|
+    %i[exp log sin cos tan sqrt].each do |sym|
       @global_binding.bind(sym, Math.method(sym))
-    }
+    end
     @global_binding.bind(:pi, Math::PI)
-    @global_binding.bind('*e*'.intern, Math::E)
+    @global_binding.bind(:'*e*', Math::E)
 
-    @global_binding.bind('make-rectangular'.intern, Kernel.singleton_method(:Complex))
-    @global_binding.bind('make-polar'.intern, Complex.method(:polar))
-    @global_binding.bind('*i*'.intern, Complex::I)
+    @global_binding.bind(:'make-rectangular', Kernel.singleton_method(:Complex))
+    @global_binding.bind(:'make-polar', Complex.method(:polar))
+    @global_binding.bind(:'*i*', Complex::I)
 
     @global_binding.bind(:cons, Cons.method(:new))
 
-    @global_binding.bind('make-promise'.intern, Promiss.method(:new))
+    @global_binding.bind(:'make-promise', Promiss.method(:new))
 
-    @global_binding.bind('open-input-file'.intern, InputPort.method(:new))
-    @global_binding.bind('open-output-file'.intern, OutputPort.method(:new))
+    @global_binding.bind(:'open-input-file', InputPort.method(:new))
+    @global_binding.bind(:'open-output-file', OutputPort.method(:new))
 
-    [:funcall,
-     :logior, :logxor, :logand, :lognot, :logbitp, :ash, :expt
-    ].each{ |sym|
+    %i[funcall
+       logior logxor logand lognot logbitp ash expt].each do |sym|
       @global_binding.bind(sym, method(sym))
-    }
+    end
 
     @global_binding.bind(:float, Kernel.method(:Float))
   end
-
 end # class Lisp

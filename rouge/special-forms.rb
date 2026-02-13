@@ -1,5 +1,3 @@
-# coding: utf-8
-
 class Lisp
   #############################################################################
   # Substance of special-forms
@@ -7,14 +5,14 @@ class Lisp
 
   def block(vm_binding, name, *forms)
     # FIXME
-    vm_binding.push_block{
-    }
+    vm_binding.push_block do
+    end
   end
 
   def _catch(vm_binding, tag, *forms)
-    catch(tag) {
+    catch(tag) do
       _begin(vm_binding, *forms)
-    }
+    end
   end
 
   def _throw(vm_binding, tag, result)
@@ -39,25 +37,25 @@ class Lisp
 
   def let(vm_binding, vars, *forms)
     new_binding = Binding.new(vm_binding)
-    vars.each{ |item|
+    vars.each do |item|
       new_binding.bind(item.car, evaluate(item.cdr.car, vm_binding))
-    }
+    end
     _begin(new_binding, *forms)
   end
 
   def let_star(vm_binding, vars, *forms)
     new_binding = Binding.new(vm_binding)
-    vars.each{ |item|
+    vars.each do |item|
       new_binding.bind(item.car, evaluate(item.cdr.car, new_binding))
-    }
+    end
     _begin(new_binding, *forms)
   end
 
   def _begin(vm_binding, *forms)
     val = Unspecified
-    forms.each{|form|
+    forms.each do |form|
       val = evaluate(form, vm_binding)
-    }
+    end
     val
   end
 
@@ -70,7 +68,7 @@ class Lisp
     val = Null
     begin
       val = evaluate(protected_form)
-    rescue
+    rescue StandardError
     ensure
       _begin(vm_binding, cleanup_forms)
       val
@@ -82,22 +80,21 @@ class Lisp
     Unspecified
   end
 
-
   def _and(vm_binding, *forms)
     val = true
-    forms.each{ |form|
+    forms.each do |form|
       val = evaluate(form, vm_binding)
       return val unless val
-    }
+    end
     val
   end
 
   def _or(vm_binding, *forms)
     val = false
-    forms.each{ |form|
+    forms.each do |form|
       val = evaluate(form, vm_binding)
       return val if val
-    }
+    end
     val
   end
 
@@ -130,8 +127,7 @@ class Lisp
   end
 
   def _do(vm_binding, *forms)
-    var_decls  = Array(forms.shift).collect do
-      |item|
+    var_decls = Array(forms.shift).collect do |item|
       Array(item)
     end
 
@@ -146,9 +142,7 @@ class Lisp
     end
 
     while true
-      if evaluate(end_clause.car, new_binding)
-        return _begin(new_binding, *Array(end_clause.cdr))
-      end
+      return _begin(new_binding, *Array(end_clause.cdr)) if evaluate(end_clause.car, new_binding)
 
       _begin(new_binding, *commands)
 
@@ -164,8 +158,8 @@ class Lisp
   end
 
   def __symbol_list__(vm_binding)
-    sym_list = Array.new
-    while vm_binding do
+    sym_list = []
+    while vm_binding
       sym_list += vm_binding.hash.keys
       vm_binding = vm_binding.parent
     end
@@ -177,28 +171,27 @@ class Lisp
   private
 
   def define_sp_forms
-    [:let, :quote, :define, :eval, :delay, :cond].each{ |sym|
+    %i[let quote define eval delay cond].each do |sym|
       @sp_forms[sym] = method(sym)
-    }
+    end
 
-    { 'unwind-protect'.intern => :unwind_protect,
-      :catch   => :_catch,
-      :throw   => :_throw,
-      :begin   => :_begin,
-      :if      => :_if,
-      :set!    => :_set!,
-      :let     => :let,
-      'let*'.intern   => :let_star,
-      'letrec'.intern => :let_star, # XXX?
+    { 'unwind-protect': :unwind_protect,
+      catch: :_catch,
+      throw: :_throw,
+      begin: :_begin,
+      if: :_if,
+      set!: :_set!,
+      let: :let,
+      'let*': :let_star,
+      letrec: :let_star, # XXX?
       # special form で無くても良いはずだけど
-      :and     => :_and,
-      :or      => :_or,
-      :case    => :_case,
-      :do      => :_do,
-      :__symbol_list__ => :__symbol_list__,
-    }.each{ |key, val|
+      and: :_and,
+      or: :_or,
+      case: :_case,
+      do: :_do,
+      __symbol_list__: :__symbol_list__, }.each do |key, val|
       @sp_forms[key] = method(val)
-    }
+    end
 
     @sp_forms[:lambda] = LambdaClosure.method(:new)
 
@@ -210,5 +203,4 @@ class Lisp
     # @sp_forms['multiple-value-prog1'.intern]
     # @sp_forms['return-from'.intern]
   end
-
 end # class Lisp

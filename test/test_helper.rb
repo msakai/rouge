@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require "minitest/autorun"
-require_relative "../rouge/rouge"
+require 'minitest/autorun'
+require_relative '../rouge/rouge'
 
 # Create a VM instance and load the standard library
 def create_vm
   vm = Lisp.new
-  Dir[File.join(File.dirname(__FILE__), "..", "lib", "*.scm")].each do |item|
+  Dir[File.join(File.dirname(__FILE__), '..', 'lib', '*.scm')].each do |item|
     vm.load(item)
   end
   vm

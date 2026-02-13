@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require "rake/testtask"
+require 'rake/testtask'
 
 Rake::TestTask.new(:test) do |t|
-  t.libs << "test"
-  t.test_files = FileList["test/**/test_*.rb"]
+  t.libs << 'test'
+  t.test_files = FileList['test/**/test_*.rb']
 end
 
-require "rubocop/rake_task"
+require 'rubocop/rake_task'
 
 RuboCop::RakeTask.new
 
