@@ -40,6 +40,21 @@ The interpreter follows a classic Lisp architecture: parse → eval → print.
 
 **Standard library** (`lib/*.scm`): Scheme files auto-loaded at startup providing list primitives (caar/cadr/etc.), character predicates, math functions (via Ruby interop), and I/O helpers.
 
+## Web REPL (`web/`)
+
+Browser-based REPL using ruby.wasm and xterm.js. Runs the Rouge interpreter entirely in the browser via WebAssembly.
+
+```bash
+cd web
+npm install
+npm run dev       # Start dev server (http://localhost:5173)
+npm run build     # Production build
+```
+
+**Architecture**: Main thread (xterm.js + line buffering) communicates with a Web Worker (ruby.wasm + WASI) via SharedArrayBuffer for synchronous stdin. Ruby/Scheme source files are bundled into the WASI virtual filesystem via Vite's `?raw` imports. No changes to existing Ruby/Scheme code — uses a separate entry point (`web/src/rouge-entry.rb`).
+
+See `web/README.md` for detailed design decisions.
+
 ## Key Design Points
 
 - The `Lisp` class holds global bindings and dispatches evaluation. Special forms are registered in `@sp_forms` hash and built-in functions via `@global_binding.bind`.
