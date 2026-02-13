@@ -26,6 +26,18 @@ bundle install
 bundle exec rake test
 ```
 
+### Lint (RuboCop)
+
+[RuboCop](https://rubocop.org/) を使ってコードスタイルをチェックできます。
+
+```bash
+bundle exec rake rubocop           # lint を実行
+bundle exec rake rubocop:autocorrect  # 自動修正可能な違反を修正
+```
+
+既存コードの違反は `.rubocop_todo.yml` に記録されています。
+新しく書くコードは RuboCop のルールに従ってください。
+
 ## Not a bug, but a feature(tm)
 
 - 完全数/不完全数の概念をサポートしない
