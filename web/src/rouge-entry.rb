@@ -10,11 +10,7 @@ STDERR.write <<~EOT
   Rouge - Lisp Interpreter written in Ruby (WASM)
 
   Copyright (C) 2001 Masahiro Sakai
-      All rights reserved.
-      This is free software with ABSOLUTELY NO WARRANTY.
-
-  This is distributed freely in the sense of
-  GPL(GNU General Public License) or Ruby's licence.
+  This is free software with ABSOLUTELY NO WARRANTY.
   ==============================================================
 
 EOT

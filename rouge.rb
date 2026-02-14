@@ -1,12 +1,5 @@
 #!/usr/bin/env ruby
 
-# Copyright (C) 2001 Masahiro Sakai
-#     All rights reserved.
-#     This is free software with ABSOLUTELY NO WARRANTY.
-#
-# This is distributed freely in the sence of
-# GPL(GNU General Public License) or Ruby's licence.
-
 require_relative 'rouge/rouge'
 require_relative 'rouge/console'
 
@@ -15,11 +8,7 @@ STDERR.write <<~EOT
   Rouge - Lisp Interpriter written in Ruby
 
   Copyright (C) 2001 Masahiro Sakai
-      All rights reserved.
-      This is free software with ABSOLUTELY NO WARRANTY.
-
-  This is distributed freely in the sence of
-  GPL(GNU General Public License) or Ruby's licence.
+  This is free software with ABSOLUTELY NO WARRANTY.
   ==============================================================
 
 EOT
