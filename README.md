@@ -8,6 +8,8 @@ This is a simple Scheme-like Lisp implementation written in Ruby, created as a m
 
 🚀 Try on your browser: [WebAssembly Demo](https://msakai.github.io/rouge/) (no installation required!)
 
+![](screenshot.png)
+
 ## Requiements / 必要なもの
 
 - Ruby >=2.5
