@@ -4,13 +4,15 @@
 Scheme風を目指していますが、仕様はかなり簡略化したものです。
 （その後、Ruby 3.x で対応と Web 版の実装などを行なっています）
 
+This is a simple Scheme-like Lisp implementation written in Ruby, created as a mini-project for the “Symbolic Processing Programming” course (instructor: Michiaki Yasumura) at Keio University SFC during the Spring 2001 semester. While aiming for Scheme-like functionality, the specification is significantly simplified. (Subsequently, updates for Ruby 3.x compatibility and a web-based implementation were developed.)
+
 🚀 Try on your browser: [WebAssembly Demo](https://msakai.github.io/rouge/) (no installation required!)
 
-## 必要なもの
+## Requiements / 必要なもの
 
 - Ruby >=2.5
 
-## 使い方
+## Usage / 使い方
 
 ```bash
 bundle install
@@ -19,7 +21,7 @@ bundle exec rouge.rb
 
 `(bye)` で終了します。
 
-## 開発
+## Development / 開発
 
 ```bash
 bundle install
@@ -38,11 +40,11 @@ bundle exec rake rubocop:autocorrect  # 自動修正可能な違反を修正
 既存コードの違反は `.rubocop_todo.yml` に記録されています。
 新しく書くコードは RuboCop のルールに従ってください。
 
-## 制限
+## Limitation / 制限
 
 - 完全数/不完全数の概念をサポートしない
 
-## 未サポート機能
+## Unsupported Features / 未サポート機能
 
 - 入出力周り
 - 複素数リテラル
