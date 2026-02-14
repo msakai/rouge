@@ -50,11 +50,18 @@ bundle exec rake rubocop:autocorrect  # 自動修正可能な違反を修正
 - マルチバイト文字
 - (他にも沢山)
 
-## ライセンス
+## License
 
-Copyright (C) 2001 Masahiro Sakai.
-All rights reserved.
-This is free software with ABSOLUTELY NO WARRANTY.
+Copyright (C) 2001-2026 Masahiro Sakai
 
-This is distributed freely in the sence of 
-GPL(GNU General Public License) or Ruby's licence.
+Unless otherwise noted, all files in this repository are dual-licensed under:
+
+- the BSD 2-Clause License (see [LICENSE.BSD](LICENSE.BSD)), or
+- the Ruby License (see [LICENSE.Ruby](LICENSE.Ruby))
+
+Exceptions:
+
+- `rouge/parser.rb`
+  This file is derived from third-party software originally licensed
+  under the GNU General Public License (GPL) or the Ruby License.
+  Therefore it is distributed under the GPL or the Ruby License.
