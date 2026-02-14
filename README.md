@@ -61,7 +61,7 @@ Unless otherwise noted, all files in this repository are dual-licensed under:
 
 Exceptions:
 
-- rouge/parser.rb  
+- `rouge/parser.rb`
   This file is derived from third-party software originally licensed
   under the GNU General Public License (GPL) or the Ruby License.
   Therefore it is distributed under the GPL or the Ruby License.

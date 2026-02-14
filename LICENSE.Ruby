@@ -1,6 +1,5 @@
 Rouge is copyrighted free software by Masahiro Sakai <masahiro.sakai@gmail.com>.
-You can redistribute it and/or modify it under either the terms of the
-2-clause BSDL (see the file BSDL), or the conditions below:
+You can redistribute it and/or modify it under the conditions below:
 
   1. You may make and give away verbatim copies of the source form of the
      software without restriction, provided that you duplicate all of the
@@ -40,9 +39,6 @@ You can redistribute it and/or modify it under either the terms of the
   4. You may modify and include the part of the software into any other
      software (possibly commercial).  But some files in the distribution
      are not written by the author, so that they are not under these terms.
-
-     For the list of those files and their copying conditions, see the
-     file LEGAL.
 
   5. The scripts and library files supplied as input to or produced as
      output from the software do not automatically fall under the
