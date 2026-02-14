@@ -1,0 +1,352 @@
+ 1.タイトル
+
+    Rouge(る〜じゅ)。
+
+ 2.学籍番号、氏名、ログイン名 
+
+    学籍番号    70103970
+    氏名        酒井政裕
+    ログイン名  s01397ms
+
+ 3.提出日
+
+    2001年7月16日
+
+ 4.選択した課題名とその内容
+
+    簡易的なLisp処理系の実装。
+    実装言語にはRubyを使用。
+
+    フランス語のRougeはRubyと同じ語源を持つので、
+    この名前にしました。
+
+ 5.プログラムとデータファイルの場所と実行の方法 
+
+    カレントディレクトリで
+    % ./rouge.rb
+    あるいは
+    % ruby rouge.rb
+
+ 7.プログラムの概要、データの概要
+
+    Rubyで書いた、Lispの簡易的な処理系です。
+    Schemeっぽい感じを目指していますが、
+    仕様にはいい加減な部分があります。
+
+ 8.実行例
+
+    rouge> (define x (let ((x 5)) (lambda (y) (+ x y))))
+    <unspecified>
+    rouge> x
+    #<procedure 643852>
+    rouge> (x 6)
+    11
+
+ 9.考察(苦労した点、工夫した点、やり残した点など) 
+
+    GC等のについて、Rubyにまかせてしまうことができたので、
+    そういう点では楽を出来た。
+
+    オブジェクト指向言語を使って実装するからには、
+    データ構造を継承を使って表現して、
+    ポリモルフィックにする事が考えられるが
+    Rubyとシームレスに呼び出しあう事を優先して、
+    今回はそのような設計にはあえてせず、
+    Ruby側に対応するクラスが既にある場合にはそのクラスをそのまま使用した。
+    具体的には、Numeric, Symbol, String, Array(Lisp側ではvecter)である。
+    そのため、コードの美観を損ねている部分が少なからずある。
+
+    また、インタプリタをLispクラスのオブジェクトにしているのも
+    一つの特徴である。
+    今回は試していないが、そのため、複数のインタプリタを同一のプロセス内で
+    実行することも可能なはずである。
+    また、Lispクラスを継承して、Schemeクラスや、CommonLispクラスを
+    派生するということも将来的にはやってみたいところである。
+
+
+    関数(lambda)の実装が面白かった。一般的な実装法ではないかも知れないが、
+    具体的には、lambdaは、呼ばれた時点でのバインディング, 引数情報、
+    関数本体を封入したオブジェクトを作成している。
+    そして、関数が呼び出された時点で、渡された引数と引数情報から
+    新たなバインディングを作成し、さらに封入しておいたバインディングも
+    参照できるようにし、その後beginにより本体を実行している。
+    
+    さらに、Rubyでは手続きやメソッドをオブジェクト化したものは、
+    callメソッドに反応にするので、lambdaで作成したオブジェクトにも
+    callメソッドを実装することにより、Rubyのものと同様に呼び出せるようした。
+
+    こういう形で実装しているので、関数の呼び出しは、組み込みのものも、
+    ユーザ定義のものも、リストのcar部のオブジェクトのcallメソッドを
+    呼び出すことにより実現している。
+
+
+    やり残した点として以下のような点があるが、マクロの実装が出来なかったのは、
+    痛いです。
+    ・マクロ
+    ・末尾再帰の最適化
+    ・入出力周り(Portオブジェクト)
+    ・複素数リテラル
+    ・(他にも沢山)
+
+    ちなみに、以下はバグではなく仕様である。
+    ・完全数/不完全数の概念をサポートしない
+    ・((lambda (x . y) (* x y)) 5 . 6) のような記述も可能
+    ・eval関数は呼びだした環境ではなく、globalな環境で実行されます。
+
+10.謝辞(お世話になった人と手伝ってもらった具体的内容) 
+
+    以下の方々に感謝します。
+    
+    高林哲さん
+      パーサー部分(lib/parser.rb)について
+      ruby-sexpを改造して使わせてもらっています。
+      <URL:http://cvs.namazu.org/ruby-sexp/>
+
+11.参考文献
+
+    r5rs 犬飼氏訳日本語版
+    <URL:http://www.sci.toyama-u.ac.jp/~iwao/Scheme/>
+
+12.付録: プログラムリスト、データリスト、その他 
+
+ファイル構成
+
+    rouge以下はRubyで書かれたパート
+        character.rb      文字オブジェクト
+        functions.rb      組み込み関数
+        lambda-closure.rb ラムダで作られる関数の実体
+        list.rb           Consと空リスト
+        parser.rb         パーサー
+        port.rb           ポートオブジェクト (未実装)
+        promise.rb        delayとforceで使われるpromiseオブジェクト
+        quote.rb          各種のquoteを表現する内部構造
+        rouge.rb          インタプリタ本体
+        special-forms.rb  スペシャルフォームの実体
+    
+    lib以下はLispで書かれたパート
+        character.scm     文字関係
+        control.scm       制御構造
+        list.scm          リスト関係
+        list-misc.scm     リスト関係2
+        math.scm          数学関数
+        string.scm        文字列関数
+        misc.scm          その他
+
+
+デフォルトで定義されているシンボルとスペシャルフォーム
+
+char->integer
+char-ci>=?
+char-ci<=?
+char-ci>?
+char-ci<?
+char-ci=?
+char>=?
+char<=?
+char>?
+char<?
+char=?
+char-downcase
+char-upcase
+char-lower-case?
+char-upper-case?
+char-whitespace?
+char-numeric?
+char-alphabetic?
+string-ci/=?
+string/=?
+last
+rest
+tenth
+load
+display
+close-output-file
+close-input-file
+output-port?
+input-port?
+eval
+call/cc
+call-with-current-continuation
+force
+procedure?
+list->vector
+vector->list
+vector-set!
+vector-ref
+vector-length
+vector
+make-vector
+string-fill!
+string-copy
+list->string
+string->list
+string-append
+string-ci>=?
+string-ci<=?
+string-ci>?
+string-ci<?
+string-ci=?
+string>=?
+string<=?
+string>?
+string<?
+string=?
+string-set!
+string-ref
+string-length
+string
+make-string
+string?
+integer->char
+char?
+string->symbol
+symbol->string
+symbol?
+null?
+set-cdr!
+eq?
+eqv?
+ruby:send
+ruby:eval
+set-car!
+cdr
+car
+pair?
+boolean?
+not
+number->string
+angle
+magnitude
+imag-part
+real-part
+round
+trancate
+ceiling
+floor
+denominator
+numerator
+modulo
+lcm
+gcd
+remainder
+quotient
+abs
+/
+*
+-
++
+max
+min
+even?
+odd?
+negative?
+positive?
+zero?
+>=
+<=
+>
+<
+=
+integer?
+rational?
+real?
+float?
+complex?
+number?
+equal?
+bye
+exit
+exp
+log
+sin
+cos
+tan
+sqrt
+pi
+*e*
+make-rectangular
+make-polar
+*i*
+cons
+make-promise
+open-input-file
+open-output-file
+funcall
+logior
+logxor
+logand
+lognot
+logbitp
+ash
+expt
+float
+caar
+cadr
+cdar
+cddr
+caaar
+caadr
+cadar
+caddr
+cdaar
+cdadr
+cddar
+cdddr
+caaaar
+caaadr
+caadar
+caaddr
+cadaar
+cadadr
+caddar
+cadddr
+cdaaar
+cdaadr
+cdadar
+cdaddr
+cddaar
+cddadr
+cdddar
+cddddr
+listp
+lenth
+list
+copy-list
+append
+reverse
+list-tail
+list-ref
+member-if
+memq
+memv
+member
+assoc-if
+assq
+assv
+assoc
+/=
+atom
+identity
+lognand
+lognor
+logandc1
+logandc2
+logorc1
+logorc2
+logtest
+1+
+1-
+asin
+acos
+atan
+conjugate
+endp
+first
+second
+third
+fourth
+fifth
+sixth
+seventh
+eighth
+ninth
