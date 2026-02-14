@@ -109,9 +109,7 @@ WASI 仮想 FS にマウントしている:
 
 ### 7. WASM バイナリの配信
 
-`@ruby/3.4-wasm-wasi` パッケージの `ruby+stdlib.wasm` (~30MB) を使用。
-開発時は Vite が `node_modules` から直接配信する。
-本番ビルドでは別途 WASM ファイルの配置が必要。
+`@ruby/3.4-wasm-wasi` パッケージの `ruby+stdlib.wasm` (~30MB) を使用し、Viteの `?url` を用いて配信する。
 
 ## 参考にしたプロジェクト
 

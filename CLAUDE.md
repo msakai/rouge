@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Rouge (る〜じゅ) is a Scheme-like Lisp interpreter written in Ruby, created in 2001.
+Rouge is a Scheme-like Lisp interpreter written in Ruby, created in 2001.
 
 ## Commands
 
@@ -61,4 +61,3 @@ See `web/README.md` for detailed design decisions.
 - Environments use a parent-chain model (`Binding` with `@parent`). `let`/`lambda` create child bindings.
 - Ruby interop is exposed through `ruby:eval` and `ruby:send` built-ins, used extensively in `lib/*.scm` for math and string operations.
 - `define` only supports `(define sym expr)` form, not `(define (name args) body)` shorthand.
-- The parser uses class-level `$` regex globals, which creates thread-safety issues (noted in TODO).
