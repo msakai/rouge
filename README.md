@@ -1,9 +1,10 @@
-# Rouge (る〜じゅ)
+# Rouge
 
 慶應義塾大学SFCの2001年春学期の「記号処理プログラミング」（担当：安村 通晃）の課題（ミニプロ）として、Rubyで実装したScheme風の簡易的なLisp処理系です。
-Schemeっぽい感じを目指していますが、仕様は厳密ではありません。
+Scheme風を目指していますが、仕様はかなり簡略化したものです。
+（その後、Ruby 3.x で対応と Web 版の実装などを行なっています）
 
-（その後、Ruby 3.x で動作するように、若干のアップデートを加えています）
+🚀 Try on your browser: [WebAssembly Demo](https://msakai.github.io/rouge/) (no installation required!)
 
 ## 必要なもの
 
@@ -37,11 +38,11 @@ bundle exec rake rubocop:autocorrect  # 自動修正可能な違反を修正
 既存コードの違反は `.rubocop_todo.yml` に記録されています。
 新しく書くコードは RuboCop のルールに従ってください。
 
-## Not a bug, but a feature(tm)
+## 制限
 
 - 完全数/不完全数の概念をサポートしない
 
-## サポートされていない(サポートしたい)機能
+## 未サポート機能
 
 - 入出力周り
 - 複素数リテラル
