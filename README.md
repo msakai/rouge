@@ -65,7 +65,7 @@ bundle exec rake rubocop:autocorrect  # 自動修正可能な違反を修正
 - マルチバイト文字
 - (他にも沢山)
 
-## License
+## License / ライセンス
 
 Copyright (C) 2001-2026 Masahiro Sakai
 
