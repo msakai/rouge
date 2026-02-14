@@ -13,7 +13,7 @@ STDERR.write <<~EOT
       All rights reserved.
       This is free software with ABSOLUTELY NO WARRANTY.
 
-  This is distributed freely in the sence of
+  This is distributed freely in the sense of
   GPL(GNU General Public License) or Ruby's licence.
   ==============================================================
 
