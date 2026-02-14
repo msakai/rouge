@@ -19,7 +19,20 @@ bundle install
 bundle exec rouge.rb
 ```
 
-`(bye)` で終了します。
+実行例:
+
+```
+rouge> (define fact
+rouge*   (lambda (x)
+rouge*     (if (<= x 0)
+rouge*       1
+rouge*       (* x (fact (- x 1))))))
+rouge> (fact 10)
+3628800
+rouge> (bye)
+```
+
+REPL の終了は `(bye)` で行います。
 
 ## Development / 開発
 
